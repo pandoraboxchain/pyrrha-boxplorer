@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { actions as Actions } from '../../redux/modules/boxchainModule';
+import { actions as exampleActions } from '../../redux/modules/example';
 import { exampleSelector } from '../../redux/selectors/exampleSelector';
 import { Example, ExampleWithError } from '../../common/components/Example';
 import { ErrorBoundary } from '../../common/components/Utilities';
@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  ...Actions,
+  ...exampleActions,
 };
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -25,7 +25,7 @@ class ExampleView extends Component {
   }
 
   componentDidMount() {
-    this.props.getURL('http://localhost:1111/workers');
+    this.props.getAwesomeCode();
   }
 
   render() {

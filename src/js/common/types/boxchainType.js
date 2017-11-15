@@ -1,4 +1,4 @@
-export type exampleType = {
+export type boxchainType = {
   title: string,
   description: string,
   source: string,
