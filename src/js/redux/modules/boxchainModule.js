@@ -3,29 +3,39 @@ import { Map } from 'immutable';
 
 import type { boxchainType } from '../../common/types/boxchainType'
 
-const GET_URL = 'app/example/GET_URL';
+const SET_URL = 'app/example/SET_URL';
 const GET_DATA = 'app/example/GET_DATA';
 
 export const constants = {
-  GET_URL,
+  SET_URL,
   GET_DATA,
 };
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-function getURL(url) {
+
+export function setUrl(url, title) {
   return {
-    type: GET_URL,
+    type: SET_URL,
     url,
+    title,
   }
 }
+
+// export function getDATA(url, result) {
+//   return {
+//     type: GET_DATA,
+//     url,
+//     result,
+//   }
+// }
 // export const getAwesomeCode = createAction(GET_EXAMPLE, () => ({}));
-export const getDATA = createAction(GET_DATA, (result : boxchainType) => ({ result }));
+export const getData = createAction(GET_DATA, (result : boxchainType) => ({ result }));
 
 export const actions = {
-  getURL,
-  getDATA,
+  setUrl,
+  getData
 };
 
 export const reducers = {

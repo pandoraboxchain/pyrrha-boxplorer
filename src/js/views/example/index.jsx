@@ -25,7 +25,7 @@ class ExampleView extends Component {
   }
 
   componentDidMount() {
-    this.props.getURL('http://localhost:1111/workers');
+    this.props.setUrl('http://localhost:1111/workers', '');
   }
 
   render() {

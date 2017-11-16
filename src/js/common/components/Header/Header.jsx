@@ -20,26 +20,26 @@ class Header extends PureComponent {
           <Link to="/">BOXPLORER</Link>
         </div>
         <ul>
-          <li className={!isWorkers ? 'active' : ''}>
+          <li className={isWorkers ? 'active' : ''}>
             {
               isWorkers ?
                 'Workers' : <Link to="/workers">Workers</Link>
 
             }
           </li>
-          <li className={!isJobs ? 'active' : ''}>
+          <li className={isJobs ? 'active' : ''}>
             {
               isJobs ?
                 'Jobs' : <Link to="/jobs">Jobs</Link>
             }
           </li>
-          <li className={!isKernels ? 'active' : ''}>
+          <li className={isKernels ? 'active' : ''}>
             {
               isKernels ?
                 'Kernels' : <Link to="/kernels">Kernels</Link>
             }
           </li>
-          <li className={!isDatasets ? 'active' : ''}>
+          <li className={isDatasets ? 'active' : ''}>
             {
               isDatasets ?
                 'Datasets' : <Link to="/datasets">Datasets</Link>

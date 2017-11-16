@@ -7,7 +7,17 @@
   flex-flow: row wrap;
   align-items: center;
   height: 102px;
-  .logo a{
+  margin-bottom: 18px;
+  &:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    left: 0;
+    top: 100px;
+    background-color: #fff;
+  }
+  .logo a {
     font-size: 24px;
     color: #fff;
     font-weight: 100;
@@ -26,14 +36,22 @@
       font-size: 16px;
       border: 0;
       cursor: default;
-      font-weight: bold;
+      font-weight: 300;
+      color: #fff;
       &:last-of-type {
         margin-right: 0;
        }
-      &.active:hover {
-
+      &.active, &:hover {
+        &:after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 2px;
+          bottom: -6px;
+          left: 0;
+          background-color: #C4C4C4;
+        }
       }
-
       a {
         text-decoration: none;
         color: #fff;
