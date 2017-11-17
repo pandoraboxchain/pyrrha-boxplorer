@@ -1,9 +1,9 @@
 import { all } from 'redux-saga/effects'
-import { exampleSaga } from './exampleSaga';
+import { boxchainDataSaga } from './boxchainDataSaga';
 
 
 export default function* sagas() {
   yield all([
-    ...exampleSaga,
+    ...boxchainDataSaga,
   ]);
 }

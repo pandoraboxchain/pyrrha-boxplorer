@@ -1,15 +1,46 @@
 @import "configs/color";
 
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: black;
+}
+
+#app-container {
+  position: relative;
+}
+
 .container {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin: 0 auto;
+  padding: 0;
   font-size: 16px;
-  margin-left: 60px;
-  margin-right: 60px;
+}
+
+pre {
+  background-color: transparent;
+  color: #fff;
+  border: 0;
 }
 
 .container__content {
+
 }
 
-h1, h2 {
-  font-family: YourFavoriteFont;
+.title {
+  margin-bottom: 26px;
+  padding: 0 7px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  font-size: 24px;
+  color: #fff;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1200px;
+  }
 }

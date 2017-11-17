@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import { Header } from './common/components/Header';
 import ExampleRouteHandler from './views/example';
+import Workers from './views/workers'
 
 import '../assets/fonts/fonts.css';
 
@@ -26,6 +27,7 @@ module.exports = (
       <Switch>
         <Route exact path="/" component={ExampleRouteHandler} />
         <Route path="/page" component={JustAnotherPage} />
+        <Route path="/Workers" component={Workers} />
         <Route path="*" component={ExampleRouteHandler} />
       </Switch>
     </div>

@@ -8,6 +8,7 @@ class Example extends PureComponent {
     const result = props.example && props.example.result ? props.example.result : null;
 
     if (result && result.size && result.size > 0) {
+      const serialized = result.toJS();
       return (
         <div className="exampleOutput">
           <h1>Let&apos;s Get <span className="emphsize">Started</span></h1>
@@ -16,6 +17,7 @@ class Example extends PureComponent {
           <pre>
             {JSON.stringify(result.toJS(), undefined, 2)}
           </pre>
+          <h1>{serialized.title}</h1>
         </div>
 
 

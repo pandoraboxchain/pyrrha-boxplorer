@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
+import { Button, ButtonGroup, MenuItem, DropdownButton } from 'react-bootstrap';
 
 import './Header.css';
 
@@ -7,23 +8,41 @@ class Header extends PureComponent {
   render() {
     const { pathname } = this.props.location;
 
-    const isHome = pathname === '/';
-    const isJustAnotherPage = pathname === '/page';
+    // const isHome = pathname === '/';
+    const isWorkers = pathname === '/workers';
+    const isJobs = pathname === '/jobs';
+    const isKernels = pathname === '/kernels';
+    const isDatasets = pathname === '/datasets';
 
     return (
       <header className="globalHeader">
+        <div className='logo'>
+          <Link to="/">BOXPLORER</Link>
+        </div>
         <ul>
-          <li className={!isHome ? 'active' : ''}>
+          <li className={isWorkers ? 'active' : ''}>
             {
-              isHome ?
-                'Home' : <Link to="/">Home</Link>
+              isWorkers ?
+                'Workers' : <Link to="/workers">Workers</Link>
 
             }
           </li>
-          <li className={!isJustAnotherPage ? 'active' : ''}>
+          <li className={isJobs ? 'active' : ''}>
             {
-              isJustAnotherPage ?
-                'Just Another Page' : <Link to="/page">Just Another Page</Link>
+              isJobs ?
+                'Jobs' : <Link to="/jobs">Jobs</Link>
+            }
+          </li>
+          <li className={isKernels ? 'active' : ''}>
+            {
+              isKernels ?
+                'Kernels' : <Link to="/kernels">Kernels</Link>
+            }
+          </li>
+          <li className={isDatasets ? 'active' : ''}>
+            {
+              isDatasets ?
+                'Datasets' : <Link to="/datasets">Datasets</Link>
             }
           </li>
         </ul>
