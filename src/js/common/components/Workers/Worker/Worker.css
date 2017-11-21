@@ -35,32 +35,24 @@ thead > tr > th {
   }
 }
 
-.workers-list {
-  display: table-row-group;
-  & > a  {
-    display: table-row;
-    height: 35px;
-    color: #fff;
-    &:hover, &:active {
-      cursor: pointer;
-      background: rgba(196, 196, 196, 0.25);
-      color: #fff;
-      text-decoration: none;
+tbody > tr  {
+  height: 35px;
+  &:hover {
+    cursor: pointer;
+    background: rgba(196, 196, 196, 0.25);
+  }
+  & > th {
+    padding-right: 15px !important;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    font-size: 16px;
+    text-align: left;
+    &:first-of-type {
+      padding-left: 7px !important;
     }
-    & > div {
-      display: table-cell;
-      padding-right: 15px !important;
-      font-style: normal;
-      font-weight: 300;
-      line-height: normal;
-      font-size: 16px;
-      vertical-align: middle;
-      &:first-of-type {
-        padding-left: 7px !important;
-      }
-      &:last-of-type {
-        padding-right: 7px !important;
-      }
+    &:last-of-type {
+      padding-right: 7px !important;
     }
   }
 }

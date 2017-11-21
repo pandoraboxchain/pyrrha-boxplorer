@@ -6,7 +6,8 @@ import {
 } from 'react-router-dom';
 import { Header } from './common/components/Header';
 import ExampleRouteHandler from './views/example';
-import Workers from './views/workers'
+import Workers from './views/workers';
+import Worker from './views/workers/worker';
 
 import '../assets/fonts/fonts.css';
 
@@ -22,12 +23,13 @@ const HeaderWithRouter = withRouter(props => <Header {...props} />);
 module.exports = (
   <div className="container">
     <HeaderWithRouter />
-    <hr />
     <div className="container__content">
       <Switch>
         <Route exact path="/" component={ExampleRouteHandler} />
         <Route path="/page" component={JustAnotherPage} />
-        <Route path="/Workers" component={Workers} />
+        <Route path="/workers" component={Workers} />
+        <Route path="/workers" component={Worker} />
+        <Route path="/jobs" component={Workers} />
         <Route path="*" component={ExampleRouteHandler} />
       </Switch>
     </div>

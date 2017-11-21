@@ -24,19 +24,19 @@ class Workers extends PureComponent {
                   <th className="jstatus">Job Status</th>
                 </tr>
               </thead>
-              <tbody>
-                {serialized.requestRaw.workers.map(worker => {
-                  return <tr key="worker">
-                    <th className="id">{worker.id}</th>
-                    <th className="address">{worker.address}</th>
-                    <th className="job">{worker.currentJob}</th>
-                    <th className="wstatus">{worker.status}</th>
-                    <th className="jstatus">{worker.currentJobStatus}</th>
-                  </tr>
-                })
-              }
-            </tbody>
-          </Table>
+            </Table>
+            <div className="workers-list">
+              {serialized.requestRaw.workers.map(worker => {
+                return <Link to={`/workers/${worker.id}`} key="worker.id" className="worker-link">
+                  <div className="id">{worker.id}</div>
+                  <div className="address">{worker.address}</div>
+                  <div className="job">{worker.currentJob}</div>
+                  <div className="wstatus">{worker.status}</div>
+                  <div className="jstatus">{worker.currentJobStatus}</div>
+                </Link>
+              })
+            }
+          </div>
         </pre>
       </div>
 
