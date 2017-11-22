@@ -6,7 +6,8 @@
   box-sizing: border-box !important;
 }
 
-thead > tr > th {
+.wHead > div {
+  display: table-cell;
   position: relative !important;
   padding-right: 15px !important;
   padding-bottom: 15px !important;
@@ -35,32 +36,29 @@ thead > tr > th {
   }
 }
 
-.workers-list {
-  display: table-row-group;
-  & > a  {
-    display: table-row;
-    height: 35px;
+.workers-list a  {
+  display: table-row;
+  height: 35px;
+  color: #fff;
+  &:hover, &:active, &:focus {
+    cursor: pointer;
+    background: rgba(196, 196, 196, 0.25);
     color: #fff;
-    &:hover, &:active {
-      cursor: pointer;
-      background: rgba(196, 196, 196, 0.25);
-      color: #fff;
-      text-decoration: none;
+    text-decoration: none;
+  }
+  & > div {
+    display: table-cell;
+    padding-right: 15px !important;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    font-size: 16px;
+    vertical-align: middle;
+    &:first-of-type {
+      padding-left: 7px !important;
     }
-    & > div {
-      display: table-cell;
-      padding-right: 15px !important;
-      font-style: normal;
-      font-weight: 300;
-      line-height: normal;
-      font-size: 16px;
-      vertical-align: middle;
-      &:first-of-type {
-        padding-left: 7px !important;
-      }
-      &:last-of-type {
-        padding-right: 7px !important;
-      }
+    &:last-of-type {
+      padding-right: 7px !important;
     }
   }
 }
@@ -70,15 +68,15 @@ thead > tr > th {
 }
 
 .address {
-  width: 363px;
+  width: 385px;
 }
 
 .job {
-  width: 373px;
+  width: 387px;
 }
 
 .wstatus {
-  width: 99px;
+  width: 114px;
   text-align: center;
 }
 

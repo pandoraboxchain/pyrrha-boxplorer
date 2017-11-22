@@ -24,7 +24,7 @@ class WorkerView extends Component {
   }
 
   componentDidMount() {
-    this.props.setUrl('http://localhost:1111/workers', 'Worker');
+    this.props.setUrl('http://localhost:1111/workers/:worker.id', 'Worker');
   }
 
   render() {
