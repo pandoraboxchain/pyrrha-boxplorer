@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
+import Worker from '../../../views/workers/worker';
 
 import './Workers.css';
 
@@ -14,29 +15,32 @@ class Workers extends PureComponent {
       return (
         <div className="WorkersOutput">
           <pre>
-            <Table>
-              <thead>
-                <tr>
-                  <th className="id">ID</th>
-                  <th className="address">Address</th>
-                  <th className="job">Job</th>
-                  <th className="wstatus">Worker Status</th>
-                  <th className="jstatus">Job Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {serialized.requestRaw.workers.map(worker => {
-                  return <tr key="worker">
-                    <th className="id">{worker.id}</th>
-                    <th className="address">{worker.address}</th>
-                    <th className="job">{worker.currentJob}</th>
-                    <th className="wstatus">{worker.status}</th>
-                    <th className="jstatus">{worker.currentJobStatus}</th>
-                  </tr>
-                })
-              }
-            </tbody>
-          </Table>
+            <div className="wHead">
+              <div className="id">ID</div>
+              <div className="address">Address</div>
+              <div className="job">Job</div>
+              <div className="wstatus">Worker Status</div>
+              <div className="jstatus">Job Status</div>
+            </div>
+            <div className="workers-list">
+              {serialized.requestRaw.workers.map(worker => {
+                return (
+                  <div>
+                    <Route exact path="/workers" component={Workers} />
+                    <Link to={`/workers/${worker.id}`} key="worker.id">
+                      <div className="id">{worker.id}</div>
+                      <div className="address">{worker.address}</div>
+                      <div className="job">{worker.currentJob}</div>
+                      <div className="wstatus">{worker.status}</div>
+                      <div className="jstatus">{worker.currentJobStatus}</div>
+                    </Link>
+                    <Route path={`/workers/${worker.id}`} component={Worker} />
+                    {console.log(<Route path={`/workers/${worker.id}`} component={Worker} />)}
+                  </div>
+                );
+              })
+            }
+          </div>
         </pre>
       </div>
 

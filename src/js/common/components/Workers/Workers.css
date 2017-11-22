@@ -6,7 +6,8 @@
   box-sizing: border-box !important;
 }
 
-thead > tr > th {
+.wHead > div {
+  display: table-cell;
   position: relative !important;
   padding-right: 15px !important;
   padding-bottom: 15px !important;
@@ -35,19 +36,24 @@ thead > tr > th {
   }
 }
 
-tbody > tr  {
+.workers-list a  {
+  display: table-row;
   height: 35px;
-  &:hover {
+  color: #fff;
+  &:hover, &:active, &:focus {
     cursor: pointer;
     background: rgba(196, 196, 196, 0.25);
+    color: #fff;
+    text-decoration: none;
   }
-  & > th {
+  & > div {
+    display: table-cell;
     padding-right: 15px !important;
     font-style: normal;
     font-weight: 300;
     line-height: normal;
     font-size: 16px;
-    text-align: left;
+    vertical-align: middle;
     &:first-of-type {
       padding-left: 7px !important;
     }
@@ -62,15 +68,15 @@ tbody > tr  {
 }
 
 .address {
-  width: 363px;
+  width: 385px;
 }
 
 .job {
-  width: 373px;
+  width: 387px;
 }
 
 .wstatus {
-  width: 99px;
+  width: 114px;
   text-align: center;
 }
 
