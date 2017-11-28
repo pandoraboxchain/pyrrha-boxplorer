@@ -1,1 +1,1 @@
-export { default as Workers } from './Workers';
+export { default as WorkersComponent } from './Workers';

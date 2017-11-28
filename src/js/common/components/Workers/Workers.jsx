@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
-import Worker from '../../../views/workers/worker';
 
 import './Workers.css';
 
-class Workers extends PureComponent {
+class WorkersComponent extends PureComponent {
+
   render() {
     const props = this.props;
     const result = props.example && props.example.result ? props.example.result : null;
@@ -25,19 +25,16 @@ class Workers extends PureComponent {
             <div className="workers-list">
               {serialized.requestRaw.workers.map(worker => {
                 return (
-                  <div>
-                    <Route exact path="/workers" component={Workers} />
-                    <Link to={`/workers/${worker.id}`} key="worker.id">
+                  <div key={worker.id}>
+                    <Link to={`/workers/${worker.id}`}>
                       <div className="id">{worker.id}</div>
                       <div className="address">{worker.address}</div>
                       <div className="job">{worker.currentJob}</div>
                       <div className="wstatus">{worker.status}</div>
                       <div className="jstatus">{worker.currentJobStatus}</div>
                     </Link>
-                    <Route path={`/workers/${worker.id}`} component={Worker} />
-                    {console.log(<Route path={`/workers/${worker.id}`} component={Worker} />)}
                   </div>
-                );
+                )
               })
             }
           </div>
@@ -51,4 +48,4 @@ class Workers extends PureComponent {
 }
 }
 
-export default Workers;
+export default WorkersComponent;

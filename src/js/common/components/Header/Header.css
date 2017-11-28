@@ -7,7 +7,7 @@
   flex-flow: row wrap;
   align-items: center;
   height: 102px;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
   &:after {
     content: '';
     position: absolute;
