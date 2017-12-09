@@ -21,6 +21,7 @@
     font-size: 24px;
     color: #fff;
     font-weight: 100;
+    text-decoration: none;
     &:hover, &:active {
       text-decoration: none;
      }
