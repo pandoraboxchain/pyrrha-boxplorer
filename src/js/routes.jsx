@@ -27,6 +27,10 @@ const notFound = () => (
   </div>
 );
 
+const soon = () => (
+  <div>Coming Soon</div>
+);
+
 const HeaderWithRouter = withRouter(props => <Header {...props} />);
 const WorkersWithRouter = withRouter(props => <WorkersComponent {...props} />);
 const JobsWithRouter = withRouter(props => <JobsComponent {...props} />);
@@ -39,6 +43,8 @@ module.exports = (
         <Route exact path="/" component={Home} />
         <Route path="/workers" component={WorkersComponent} />
         <Route path="/jobs" component={JobsComponent} />
+        <Route path="/kernels" component={soon} />
+        <Route path="/datasets" component={soon} />
         <Route path="*" component={notFound} />
       </Switch>
       <WorkersWithRouter />
