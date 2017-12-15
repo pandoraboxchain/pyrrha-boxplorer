@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { actions as Actions } from '../../redux/modules/boxchainModule';
 import { exampleSelector } from '../../redux/selectors/exampleSelector';
-import { WorkersComponent } from '../../common/components/Workers/';
+import { JobsComponent } from '../../common/components/Jobs/';
 
 const config = require('../../../../config/development.json');
 
@@ -20,24 +20,24 @@ const mapDispatchToProps = {
 };
 
 @connect(mapStateToProps, mapDispatchToProps)
-class WorkersView extends Component {
+class JobsView extends Component {
 
   static PropTypes = {
     example: PropTypes.object.isRequired,
   }
 
   componentWillMount() {
-    this.props.setUrl(config.node_url+'/store', 'Home');
+    this.props.setUrl(config.node_url+'/store', 'Jobs');
   }
 
   render() {
     return (
       <div>
-        <h1 className="title">Workers</h1>
-        <WorkersComponent {...this.props} />
+        <h1 className="title">Jobs</h1>
+        <JobsComponent {...this.props} />
       </div>
     )
   }
 }
 
-export default WorkersView;
+export default JobsView;

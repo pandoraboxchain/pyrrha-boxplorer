@@ -3,5 +3,6 @@
   "app": {
     "description": "you can overwrite the default config",
     "hello": "Config is configurable"
-  }
+  },
+  "node_url": "http://localhost:1111"
 }

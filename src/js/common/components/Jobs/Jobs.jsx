@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 
-import './Workers.css';
+import './Jobs.css';
 
-class WorkersComponent extends PureComponent {
+class JobsComponent extends PureComponent {
 
   render() {
     const props = this.props;
@@ -13,25 +13,21 @@ class WorkersComponent extends PureComponent {
     if (result && result.size && result.size > 0) {
       const serialized = result.toJS();
       return (
-        <div className="WorkersOutput">
+        <div className="JobsOutput">
           <pre>
             <div className="wHead">
               <div className="id">ID</div>
               <div className="address">Address</div>
-              <div className="job">Job</div>
-              <div className="wstatus">Worker Status</div>
               <div className="jstatus">Job Status</div>
             </div>
             <div className="workers-list">
-              {serialized.requestRaw.workers.map(worker => {
+              {serialized.requestRaw.jobs.map(job => {
                 return (
-                  <div key={worker.id}>
-                    <Link to={`/workers/${worker.id}`}>
-                      <div className="id">{worker.id}</div>
-                      <div className="address">{worker.address}</div>
-                      <div className="job">{worker.currentJob}</div>
-                      <div className="wstatus">{worker.status}</div>
-                      <div className="jstatus">{worker.currentJobStatus}</div>
+                  <div key={job.id}>
+                    <Link to={`/jobs/${job.id}`}>
+                      <div className="id">{job.id}</div>
+                      <div className="address">{job.jobAddress}</div>
+                      <div className="jstatus">{job.jobStatus}</div>
                     </Link>
                   </div>
                 )
@@ -48,4 +44,4 @@ class WorkersComponent extends PureComponent {
 }
 }
 
-export default WorkersComponent;
+export default JobsComponent;
