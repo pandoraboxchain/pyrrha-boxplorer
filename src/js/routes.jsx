@@ -11,12 +11,20 @@ import { WorkersComponent } from './common/components/Workers';
 import { OneWorkerComponent } from './common/components/Worker';
 import { JobsComponent } from './common/components/Jobs';
 import { OneJobComponent } from './common/components/Job';
+import { KernelsComponent } from './common/components/Kernels';
+import { OneKernelComponent } from './common/components/Kernel';
+import { DatasetsComponent } from './common/components/Datasets';
+import { OneDatasetComponent } from './common/components/Dataset';
 import ExampleRouteHandler from './views/example';
 import Home from './views/home';
 import Workers from './views/workers';
 import OneWorker from './views/worker';
 import Jobs from './views/jobs';
 import OneJob from './views/job';
+import Kernels from './views/kernels';
+import OneKernel from './views/kernel';
+import Datasets from './views/datasets';
+import OneDataset from './views/dataset';
 
 import '../assets/fonts/fonts.css';
 
@@ -34,6 +42,8 @@ const soon = () => (
 const HeaderWithRouter = withRouter(props => <Header {...props} />);
 const WorkersWithRouter = withRouter(props => <WorkersComponent {...props} />);
 const JobsWithRouter = withRouter(props => <JobsComponent {...props} />);
+const KernelsWithRouter = withRouter(props => <KernelsComponent {...props} />);
+const DatasetsWithRouter = withRouter(props => <DatasetsComponent {...props} />);
 
 module.exports = (
   <div className="container">
@@ -43,8 +53,8 @@ module.exports = (
         <Route exact path="/" component={Home} />
         <Route path="/workers" component={WorkersComponent} />
         <Route path="/jobs" component={JobsComponent} />
-        <Route path="/kernels" component={soon} />
-        <Route path="/datasets" component={soon} />
+        <Route path="/kernels" component={KernelsComponent} />
+        <Route path="/datasets" component={DatasetsComponent} />
         <Route path="*" component={notFound} />
       </Switch>
       <WorkersWithRouter />
@@ -56,6 +66,16 @@ module.exports = (
       <Switch>
         <Route exact path="/jobs" component={Jobs} />
         <Route path="/jobs/:id" component={OneJob} />
+      </Switch>
+      <KernelsWithRouter />
+      <Switch>
+        <Route exact path="/kernels" component={Kernels}/>
+        <Route path="/kernels/:id" component={OneKernel}/>
+      </Switch>
+      <DatasetsWithRouter />
+      <Switch>
+        <Route exact path="/datasets" component={Datasets}/>
+        <Route path="/datasets/:id" component={OneDataset}/>
       </Switch>
     </div>
   </div>

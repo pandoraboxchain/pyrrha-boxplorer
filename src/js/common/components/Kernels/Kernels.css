@@ -1,0 +1,85 @@
+.table, table, thead, tbody, tr, th, td {
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+  box-sizing: border-box !important;
+}
+
+.wHead > div {
+  display: table-cell;
+  position: relative !important;
+  padding-right: 15px !important;
+  padding-bottom: 15px !important;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  font-size: 16px;
+  &:after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 16px;
+    top: 2px;
+    right: 8px;
+    background-color: #C4C4C4;
+  }
+  &:first-of-type {
+    padding-left: 7px !important;
+  }
+  &:last-of-type {
+    padding-right: 7px !important;
+    &:after {
+      display: none;
+    }
+  }
+}
+
+.kernels-list a  {
+  display: table-row;
+  height: 35px;
+  color: #fff;
+  &:hover, &:active, &:focus {
+    cursor: pointer;
+    background: rgba(196, 196, 196, 0.25);
+    color: #fff;
+    text-decoration: none;
+  }
+  & > div {
+    display: table-cell;
+    padding-right: 15px !important;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    font-size: 16px;
+    vertical-align: middle;
+    &:first-of-type {
+      padding-left: 7px !important;
+    }
+    &:last-of-type {
+      padding-right: 7px !important;
+    }
+  }
+}
+
+.id {
+  width: 56px;
+}
+
+.address {
+  width: 385px;
+}
+
+.kernel {
+  width: 387px;
+}
+
+.wstatus {
+  width: 114px;
+  text-align: center;
+}
+
+.jstatus {
+  width: 252px;
+}

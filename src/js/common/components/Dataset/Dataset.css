@@ -1,0 +1,84 @@
+.DatasetOutput {
+  margin-top: 10px;
+  pre {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+  }
+  .title {
+    margin-bottom: 0;
+    padding-right: 0;
+  }
+  .status {
+    margin-left: auto;
+    padding-right: 7px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    font-size: 20px;
+    color: #FFFFFF;
+  }
+
+  .wjList {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 27px;
+  }
+
+  ul {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-flow: row wrap;
+    width: 573px;
+    h2 {
+      width: 100%;
+      margin-bottom: 11px;
+      padding-left: 7px;
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: 300;
+      line-height: normal;
+      font-size: 20px;
+      color: #FFFFFF;
+    }
+    li {
+      line-height: 27px;
+      padding: 0 7px;
+      cursor: pointer;
+      &:hover {
+        background: rgba(196, 196, 196, 0.25);
+      }
+    }
+    a {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 27px;
+      font-size: 20px;
+      color: #FFFFFF;
+      &:hover, &:active, &:focus {
+        text-decoration: none;
+        color: #fff;
+      }
+    }
+  }
+}

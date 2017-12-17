@@ -47,9 +47,9 @@ class HomeComponent extends PureComponent {
             <h3>Kernels</h3>
             {serialized.requestRaw.kernels.map(kernel => {
               return (
-                <Link to={`/kernels/${kernel.kernel}`}>
-                  <div className="half_inner id">{kernel.kernel}</div>
-                  <div className="half_inner address">{kernel.redis}</div>
+                <Link to={`/kernels/${kernel.id}`}>
+                  <div className="half_inner id">{kernel.address}</div>
+                  <div className="half_inner address">{kernel.dim}</div>
                 </Link>
               )
             })
@@ -60,9 +60,9 @@ class HomeComponent extends PureComponent {
           <h3>Datasets</h3>
           {serialized.requestRaw.datasets.map(dataset => {
             return (
-              <Link to={`/datasets/${dataset.dataset}`}>
-                <div className="half_inner id">{dataset.dataset}</div>
-                <div className="half_inner address">{dataset.redis}</div>
+              <Link to={`/datasets/${dataset.id}`}>
+                <div className="half_inner id">{dataset.address}</div>
+                <div className="half_inner address">{dataset.dim}</div>
               </Link>
               )
             })
