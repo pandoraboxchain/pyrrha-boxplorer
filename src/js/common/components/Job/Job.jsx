@@ -20,7 +20,8 @@ class OneJobComponent extends PureComponent {
               <h1 className="status">Status: {jobItem[0].jobStatus}</h1>
               <div className="wjList">
                 <ul>
-                  <h2>ipfs: {jobItem[0].ipfs}</h2>
+                  <h2>Kernel: {jobItem[0].kernel}</h2>
+                  <h2>Dataset: {jobItem[0].dataset}</h2>
                 </ul>
               </div>
           </pre>
