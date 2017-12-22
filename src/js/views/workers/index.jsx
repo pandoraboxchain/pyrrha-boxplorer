@@ -35,6 +35,7 @@ class WorkersView extends Component {
 
   componentWillMount() {
     this.props.setUrl(config.node_url+'/store', 'Home');
+    console.log("node url + " + config.node_url);
   }
 
   appendNewFields(json, newJson) {
@@ -85,7 +86,7 @@ class WorkersView extends Component {
         <h1 className="title">Workers</h1>
         <WorkersComponent {...workers} />
 
-        <Websocket url='ws://localhost:1337/' debug={true}
+        <Websocket url={config.websocket_url}
             onMessage={this.handleUpdateEvent.bind(this)}/>
       </div>
     )

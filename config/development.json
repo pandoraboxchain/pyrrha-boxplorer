@@ -4,5 +4,6 @@
     "description": "you can overwrite the default config",
     "hello": "Config is configurable"
   },
-  "node_url": "http://localhost:1111"
+  "node_url": "http://localhost:1111",
+  "websocket_url": "ws://localhost:1337"
 }
