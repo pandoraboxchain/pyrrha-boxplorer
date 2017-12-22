@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import { actions as Actions } from '../../redux/modules/boxchainModule';
 import { exampleSelector } from '../../redux/selectors/exampleSelector';
 import { WorkersComponent } from '../../common/components/Workers/';
-import { Map } from 'immutable';
+
+import { appendDataFromWebsocket, createStateDataFromProps } from '../../utility/websocketHelper';
 
 const config = require('../../../../config/development.json');
 
@@ -30,64 +31,34 @@ class WorkersView extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {latestData: null };
+    this.state = { actualData: null };
   }
 
   componentWillMount() {
     this.props.setUrl(config.node_url+'/store', 'Home');
-    console.log("node url + " + config.node_url);
   }
 
-  appendNewFields(json, newJson) {
-    for(var key in json) {
-      json[key].push(...newJson[key]);
-    }
-  }
+  handleWebsocketMessage(websocketData) {
+    if (!this.props.example.result) return;
 
-  getRawRequest(container) {
-    if (container && container.example && container.example.result) {
-      var rawRequest = container.example.result.get("requestRaw");
-      return rawRequest;
-    }
-    return null;
-  }
-
-  createStateFromProps() {
-    var stateJson = {};
-    var propsJson = this.getRawRequest(this.props).toJS();
-
-    for(var key in propsJson) {
-      stateJson[key] = propsJson[key];
+    var actualData = this.state.actualData;
+    if (!actualData) {
+        actualData = createStateDataFromProps(this.props);
     }
 
-    var map = Map({ requestRaw: stateJson });
-    return {example: {result: map } };
-  }
-
-  handleUpdateEvent(data) {
-    var latestData = this.state.latestData;
-    if (!latestData && this.props.example.result) {
-      latestData = this.createStateFromProps();
-    }
-
-    var stateJson = this.getRawRequest(latestData);
-    this.appendNewFields(stateJson, JSON.parse(data));
-
-    this.setState({ latestData: latestData });
+    appendDataFromWebsocket(actualData, websocketData);
+    this.setState({ actualData: actualData });
   }
 
   render() {
-    let workers = this.state.latestData;
-    if (!workers)
-      workers = this.props;
-      
+    let actualData = this.state.actualData ? this.state.actualData : this.props;      
     return (
       <div>
         <h1 className="title">Workers</h1>
-        <WorkersComponent {...workers} />
+        <WorkersComponent {...actualData} />
 
         <Websocket url={config.websocket_url}
-            onMessage={this.handleUpdateEvent.bind(this)}/>
+            onMessage={this.handleWebsocketMessage.bind(this)}/>
       </div>
     )
   }
