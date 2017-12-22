@@ -30,28 +30,56 @@ class WorkersView extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {websocketData: {} };
+    this.state = {latestData: null };
   }
 
   componentWillMount() {
     this.props.setUrl(config.node_url+'/store', 'Home');
   }
 
-  handleUpdateEvent(data)
-  {
-    var map = Map({
-      requestRaw: JSON.parse(data)
-    })
-
-    var websocketData = {example: {result: map } };
-    
-    this.setState({ websocketData: websocketData });
-
+  appendNewFields(json, newJson) {
+    for(var key in json) {
+      json[key].push(...newJson[key]);
+    }
   }
-  //<Websocket url={'ws://'+config.node_url+'/workers/listener/'}
+
+  getRawRequest(container) {
+    if (container && container.example && container.example.result) {
+      var rawRequest = container.example.result.get("requestRaw");
+      return rawRequest;
+    }
+    return null;
+  }
+
+  createStateFromProps() {
+    var stateJson = {};
+    var propsJson = this.getRawRequest(this.props).toJS();
+
+    for(var key in propsJson) {
+      stateJson[key] = propsJson[key];
+    }
+
+    var map = Map({ requestRaw: stateJson });
+    return {example: {result: map } };
+  }
+
+  handleUpdateEvent(data) {
+    var latestData = this.state.latestData;
+    if (!latestData && this.props.example.result) {
+      latestData = this.createStateFromProps();
+    }
+
+    var stateJson = this.getRawRequest(latestData);
+    this.appendNewFields(stateJson, JSON.parse(data));
+
+    this.setState({ latestData: latestData });
+  }
 
   render() {
-    const workers = {...this.props, ...this.state.websocketData}
+    let workers = this.state.latestData;
+    if (!workers)
+      workers = this.props;
+      
     return (
       <div>
         <h1 className="title">Workers</h1>
