@@ -6,7 +6,7 @@ import { actions as Actions } from '../../redux/modules/boxchainModule';
 import { exampleSelector } from '../../redux/selectors/exampleSelector';
 import { HomeComponent } from '../../common/components/Home/';
 
-const config = require('../../../../config/development.json');
+import config from '../../../../config/development.json';
 
 require('../../../style/index.css');
 require('../../../style/reset.css');

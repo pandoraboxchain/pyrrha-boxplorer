@@ -8,8 +8,6 @@ The pretty straightforward SPA with React/Redux architecture
 $ npm install # This will install the necessary packages to use the app
 ```
 
-
-
 ### To run the app in Development Mode
 
 ```sh
@@ -47,3 +45,9 @@ After you check out the repo:
 4. If there are compilation errors, you will see it in the terminal dashboard
 5. Watch your code changes reflect on browser without refreshing
 6. Repeat your development steps
+
+## Run boxplorer in docker container locally
+
+* `docker-compose up --build`
+
+`--build` property is required for the building/rebuilding of the container  

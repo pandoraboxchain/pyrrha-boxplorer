@@ -9,7 +9,7 @@ import { WorkersComponent } from '../../common/components/Workers/';
 
 import { appendDataFromWebsocket, createStateDataFromProps } from '../../utility/websocketHelper';
 
-const config = require('../../../../config/development.json');
+import config from '../../../../config/development.json';
 
 require('../../../style/index.css');
 require('../../../style/reset.css');

@@ -7,7 +7,7 @@ import { exampleSelector } from '../../redux/selectors/exampleSelector';
 import { OneKernelComponent } from '../../common/components/Kernel';
 import { singleKernel } from '../../utility/boxchainCall'
 
-const config = require('../../../../config/development.json');
+import config from '../../../../config/development.json';
 
 require('../../../style/index.css');
 require('../../../style/reset.css');

@@ -9,7 +9,7 @@ import { DatasetsComponent } from '../../common/components/Datasets';
 
 import { appendDataFromWebsocket, createStateDataFromProps } from '../../utility/websocketHelper';
 
-const config = require('../../../../config/development.json');
+import config from '../../../../config/development.json';
 
 require('../../../style/index.css');
 require('../../../style/reset.css');
