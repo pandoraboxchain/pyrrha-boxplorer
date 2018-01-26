@@ -7,7 +7,7 @@ import { exampleSelector } from '../../redux/selectors/exampleSelector';
 import { OneJobComponent } from '../../common/components/Job';
 import { singleWorker } from '../../utility/boxchainCall'
 
-const config = require('../../../../config/development.json');
+import config from '../../../../config/development.json';
 
 require('../../../style/index.css');
 require('../../../style/reset.css');

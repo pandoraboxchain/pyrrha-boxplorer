@@ -96,7 +96,9 @@
     "redux": "^3.7.1",
     "redux-actions": "^2.2.1",
     "redux-saga": "^0.15.6",
-    "reselect": "^3.0.1"
+    "reselect": "^3.0.1",
+    "connect": "^3.6.5",
+    "serve-static": "^1.13.1"
   },
   "jest": {
     "verbose": true,

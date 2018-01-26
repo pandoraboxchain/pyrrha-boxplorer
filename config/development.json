@@ -1,9 +1,10 @@
 {
-  "env": "development",
-  "app": {
-    "description": "you can overwrite the default config",
-    "hello": "Config is configurable"
-  },
-  "node_url": "http://localhost:1111",
-  "websocket_url": "ws://localhost:1337"
+    "env": "development",
+    "app": {
+        "description": "you can overwrite the default config",
+        "hello": "Config is configurable"
+    },
+    "port": 8080,
+    "node_url": "http://localhost:1111",
+    "websocket_url": "ws://localhost:1337"
 }

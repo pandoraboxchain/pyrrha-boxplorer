@@ -1,0 +1,17 @@
+version: "2"
+services:
+
+  pyrrha_boxplorer:
+    container_name: "pyrrha_boxplorer"
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
+    networks: 
+      main:
+        aliases:
+          - pyrrha_boxplorer    
+
+networks: 
+  main:
