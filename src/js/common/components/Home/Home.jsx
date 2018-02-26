@@ -6,75 +6,75 @@ import './Home.css';
 
 class HomeComponent extends PureComponent {
 
-  render() {
-    const props = this.props;
-    const result = props.example && props.example.result ? props.example.result : null;
+    render() {
+        const props = this.props;
+        const result = props.example && props.example.result ? props.example.result : null;
 
-    if (result && result.size && result.size > 0) {
-      const serialized = result.toJS();
-      return (
-        <div className="HomeOutput">
-          <pre>
-            <div className="half">
-              <h3>Workers</h3>
-              {serialized.requestRaw.workers.map(worker => {
-                return (
-                  <Link to={`/workers/${worker.id}`}>
-                    <div className="half_inner id">{worker.id}</div>
-                    <div className="half_inner address">{worker.address}</div>
-                    <div className="half_inner status">{worker.status}</div>
-                  </Link>
-                )
-              })
-            }
-            <div className="home-gradient"></div>
-          </div>
-          <div className="half">
-            <h3>Jobs</h3>
-            {serialized.requestRaw.jobs.map(job => {
-              return (
-                <Link to={`/jobs/${job.id}`}>
-                  <div className="half_inner id">{job.id}</div>
-                  <div className="half_inner address">{job.jobAddress}</div>
-                  <div className="half_inner status">{job.jobStatus}</div>
-                </Link>
-                )
-              })
-            }
-            <div className="home-gradient"></div>
-          </div>
-          <div className="half">
-            <h3>Kernels</h3>
-            {serialized.requestRaw.kernels.map(kernel => {
-              return (
-                <Link to={`/kernels/${kernel.id}`}>
-                  <div className="half_inner id">{kernel.address}</div>
-                  <div className="half_inner address">{kernel.dim}</div>
-                </Link>
-              )
-            })
-          }
-          <div className="home-gradient"></div>
-        </div>
-        <div className="half">
-          <h3>Datasets</h3>
-          {serialized.requestRaw.datasets.map(dataset => {
+        if (result && result.size && result.size > 0) {
+            const serialized = result.toJS();
             return (
-              <Link to={`/datasets/${dataset.id}`}>
-                <div className="half_inner id">{dataset.address}</div>
-                <div className="half_inner address">{dataset.dim}</div>
-              </Link>
-              )
-            })
-          }
-          <div className="home-gradient"></div>
-        </div>
-        </pre>
-      </div>
-    );
-  }
-  return <div />;
-}
+                <div className="HomeOutput">
+                    <pre>
+                        <div className="half">
+                            <h3>Workers</h3>
+                            {serialized.requestRaw.workers.map(worker => {
+                                return (
+                                    <Link to={`/workers/${worker.id}`} key={worker.id}>
+                                        <div className="half_inner id">{worker.id}</div>
+                                        <div className="half_inner address">{worker.address}</div>
+                                        <div className="half_inner status">{worker.currentState}</div>
+                                    </Link>
+                                )
+                            })
+                            }
+                            <div className="home-gradient"></div>
+                        </div>
+                        <div className="half">
+                            <h3>Jobs</h3>
+                            {serialized.requestRaw.jobs.map(job => {
+                                return (
+                                <Link to={`/jobs/${job.id}`} key={job.id}>
+                                        <div className="half_inner id">{job.id}</div>
+                                        <div className="half_inner address">{job.address}</div>
+                                        <div className="half_inner status">{job.jobStatus}</div>
+                                    </Link>
+                                )
+                            })
+                            }
+                            <div className="home-gradient"></div>
+                        </div>
+                        <div className="half">
+                            <h3>Kernels</h3>
+                            {serialized.requestRaw.kernels.map(kernel => {
+                                return (
+                                    <Link to={`/kernels/${kernel.id}`} key={kernel.id}>
+                                        <div className="half_inner id">{kernel.address}</div>
+                                        <div className="half_inner address">{kernel.dim}</div>
+                                    </Link>
+                                )
+                            })
+                            }
+                            <div className="home-gradient"></div>
+                        </div>
+                        <div className="half">
+                            <h3>Datasets</h3>
+                            {serialized.requestRaw.datasets.map(dataset => {
+                                return (
+                                    <Link to={`/datasets/${dataset.id}`} key={dataset.id}>
+                                        <div className="half_inner id">{dataset.address}</div>
+                                        <div className="half_inner address">{dataset.dim}</div>
+                                    </Link>
+                                )
+                            })
+                            }
+                            <div className="home-gradient"></div>
+                        </div>
+                    </pre>
+                </div>
+            );
+        }
+        return <div />;
+    }
 }
 
 export default HomeComponent;

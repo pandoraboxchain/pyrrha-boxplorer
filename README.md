@@ -48,6 +48,8 @@ After you check out the repo:
 
 ## Run boxplorer in docker container locally
 
+* Be sure boxproxy is started and listened on port 1111
 * `docker-compose up --build`
+* Default boxplorer port using docker is 8080
 
 `--build` property is required for the building/rebuilding of the container  

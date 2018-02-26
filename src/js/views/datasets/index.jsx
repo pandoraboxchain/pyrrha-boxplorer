@@ -25,7 +25,7 @@ const mapDispatchToProps = {
 @connect(mapStateToProps, mapDispatchToProps)
 class DatasetsView extends Component {
 
-  static PropTypes = {
+  static propTypes = {
     example: PropTypes.object.isRequired,
   }
 

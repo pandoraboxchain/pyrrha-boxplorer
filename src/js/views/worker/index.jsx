@@ -22,7 +22,7 @@ const mapDispatchToProps = {
 
 @connect(mapStateToProps, mapDispatchToProps)
 class WorkerView extends Component {
-  static PropTypes = {
+  static propTypes = {
     example: PropTypes.object.isRequired,
   }
 

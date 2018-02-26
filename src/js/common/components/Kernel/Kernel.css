@@ -34,6 +34,15 @@
     align-items: flex-start;
     width: 100%;
     margin-top: 27px;
+
+    ul {
+      width: 100%;
+    }
+    
+    h2 {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
   }
 
   ul {

@@ -30,6 +30,7 @@
     "import/prefer-default-export": 0,
     "react/prop-types": 0,
     "react/jsx-filename-extension": 0,
-    "comma-dangle": [2, "always-multiline"]
+    "comma-dangle": [2, "always-multiline"],
+    "indent": 0
   }
 }

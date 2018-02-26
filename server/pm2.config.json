@@ -6,9 +6,6 @@
         "instances": 1,
         "exec_mode": "fork_mode",
         "name": "Pyrrha Boxplorer",
-        "env": {
-            "ENV": "PRODUCTION"
-        },
         "autorestart": true,
         "restart_delay": 5000,
         "log_file": "./logs/combined.outerr.log",

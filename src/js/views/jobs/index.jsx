@@ -26,7 +26,7 @@ const mapDispatchToProps = {
 @connect(mapStateToProps, mapDispatchToProps)
 class JobsView extends Component {
 
-  static PropTypes = {
+  static propTypes = {
     example: PropTypes.object.isRequired,
   }
 
