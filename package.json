@@ -1,7 +1,7 @@
 {
   "name": "boxplorer-frontend",
   "version": "0.0.1",
-  "description": "PandoraBoxChain Web Explorer",
+  "description": "Pandora Boxchain Explorer",
   "scripts": {
     "dev": "cross-env NODE_ENV=development node bin/commands.js dev",
     "build": "cross-env NODE_ENV=production node bin/commands.js build",
