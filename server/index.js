@@ -1,7 +1,11 @@
-const connect = require('connect');
-const serveStatic = require('serve-static');
-const config = require('../config/development');
+const express = require('express');
+const path = require('path');
+const app = express();
 
-connect().use(serveStatic(__dirname + '/../docroot')).listen(config.port, function(){
-    console.log(`Server running on ${config.port}...`);
+app.use(express.static(path.join(__dirname, '/../build')));
+
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '/../build', 'index.html'));
 });
+
+app.listen(8080);
