@@ -13,19 +13,12 @@ import rootSaga from './sagas';
 
 // Filter persitent state for connect reducer
 // these states will not been rehydrated after app reloading
-// const connectBacklist = createPersistStorageFilter(
-//     'connect',
-//     [
-//         'web3',
-//         'isMetaMask',
-//         'isConnecting',
-//         'isConnected',
-//         'connectedTo',
-//         'connectedAt',
-//         'isAccountsRefreshing',        
-//         'errorMessage'
-//     ]
-// );
+const kernelsBacklist = createPersistStorageFilter(
+    'kernels',
+    [
+        'isFetching'
+    ]
+);
 
 const persistConfig = {
     debug: process.env.NODE_ENV !== 'production',
@@ -33,7 +26,7 @@ const persistConfig = {
     storage,
     stateReconciler: autoMergeLevel2,
     transforms: [
-        // connectBacklist,
+        kernelsBacklist
     ],
     blacklist: ['router'] // exclude some states
 };

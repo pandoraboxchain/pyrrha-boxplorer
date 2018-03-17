@@ -2,7 +2,7 @@ import 'semantic-ui-css/semantic.css';
 import './App.scss';
 
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import { Container } from 'semantic-ui-react';
 import Header from '../../components/Header';
@@ -16,13 +16,15 @@ export default class App extends Component {
             <div>
                 <Header />
                 <Container className="pn-content-panel">
-                    {routes.map((route, index) => (
-                        <Route
-                            key={index}
-                            path={route.path}
-                            exact={route.exact}
-                            component={route.component} />
-                    ))}
+                    <Switch>                    
+                        {routes.map((route, index) => (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                exact={route.exact}
+                                component={route.component} />
+                        ))}
+                    </Switch>
                 </Container>
                 <Footer />
             </div>
