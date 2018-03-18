@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
+import Dashboard from '../../containers/Dashboard';
+
 export default class Home extends Component {
 
     render() {
         return (
             <div>
-                <h3>Hello</h3>
-                
-                
+                <Dashboard />
             </div>
         );
     }

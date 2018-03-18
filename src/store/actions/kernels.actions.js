@@ -19,4 +19,5 @@ export const removeKernelsMessage = index => action(KERNELS_REMOVE_MESSAGE, { in
 export const removeKernelsError = index => action(KERNELS_REMOVE_ERROR, { index });
 export const cleanKernelsMessages = () => action(KERNELS_CLEAN_MESSAGES);
 export const cleanKernelsErrors = () => action(KERNELS_CLEAN_ERRORS);
-export const fetchSingleKernel = () => action(KERNELS_SINGLE_FETCH);
+export const fetchSingleKernel = address => action(KERNELS_SINGLE_FETCH, { address });
+export const kernelSingleReceived = record => action(KERNELS_SINGLE_RECIEVED, { record });

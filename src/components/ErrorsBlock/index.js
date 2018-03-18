@@ -18,7 +18,7 @@ class ErrorsBlock extends PureComponent {
                         <div key={index}>
                             <Message
                                 index={index}
-                                success
+                                error
                                 visible={errors.length > 0}
                                 onDismiss={this.handleErrorDismiss}>
                                 {msg}

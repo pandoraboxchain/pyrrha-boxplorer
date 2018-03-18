@@ -57,3 +57,32 @@ export const extractListsPropsFromModel = (model, selectors, state) => {
 
     return props;
 };
+
+/**
+ * Add  (or update) record in array
+ * 
+ * @param {Object[]} source
+ * @param {Object[]} target
+ * @param {string} property 
+ * @returns {Object[]}
+ */
+export const addRecordsByProperty = (source = [], target = [], property) => {
+
+    if (!Array.isArray(source)) {
+
+        source = [source];
+    }
+
+    const reducer = (prev, curr) => {
+        return { ...prev, ...{[curr[property]]: curr} };
+    };
+
+    let sourceObj = source.reduce(reducer, {});
+    let targetObj = target.reduce(reducer, {});
+    let commonObj = {
+        ...sourceObj,
+        ...targetObj
+    };
+
+    return Object.keys(commonObj).map(key => commonObj[key]);
+};

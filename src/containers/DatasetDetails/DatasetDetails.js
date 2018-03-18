@@ -10,9 +10,9 @@ import * as actions from '../../store/actions';
 import { Message, Segment, Grid, Transition } from 'semantic-ui-react';
 import Loading from '../../components/Loading';
 
-import './KernelDetails.scss';
+import './DatasetDetails.scss';
 
-class KernelDetails extends PureComponent {
+class DatasetDetails extends PureComponent {
 
     state = {
         visible: false
@@ -20,9 +20,9 @@ class KernelDetails extends PureComponent {
 
     componentWillMount() {
 
-        if (!this.props.kernel) {
+        if (!this.props.dataset) {
 
-            this.props.fetchKernel(this.props.match.params.address);
+            this.props.fetchDataset(this.props.match.params.address);
         }
     }
 
@@ -32,48 +32,53 @@ class KernelDetails extends PureComponent {
         });
     }
 
-    handleDismissClick = e => this.props.goBackTo('/kernels');
+    handleDismissClick = e => this.props.goBackTo('/datasets');
 
     render() {
 
-        const { isSingleFetching, kernel } = this.props;
+        const { isSingleFetching, dataset } = this.props;
 
         return(
             <div>
-                {(!kernel || isSingleFetching) &&
+                {(!dataset || isSingleFetching) &&
                     <Loading />
                 }
-                {kernel &&
+                {dataset &&
                     <Transition 
                         visible={this.state.visible} 
                         animation='swing up' 
                         duration={150}>
-                        <Message
+                        <Message 
                             color="black" 
                             onDismiss={this.handleDismissClick}>
                             <Segment inverted>
                                 <Grid columns='equal'>
                                     <Grid.Row>
                                         <Grid.Column width={13} className="pn-details top">
-                                            <span className="label">Kernel</span>: {kernel.address}
+                                            <span className="label">Dataset</span>: {dataset.address}
                                         </Grid.Column>
                                         <Grid.Column className="pn-details pn-right">
-                                            <span className="label">Dimension:</span> {kernel.dataDim}
+                                            <span className="label">Dimension:</span> {dataset.dataDim}
                                         </Grid.Column>
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
-                                            <span className="label">Complexity:</span> {kernel.complexity}                                
+                                            <span className="label">Samples count:</span> {dataset.samplesCount}                                
                                         </Grid.Column>
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
-                                            <span className="label">Current price:</span> {kernel.currentPrice}
+                                            <span className="label">Batches count:</span> {dataset.batchesCount}                                
                                         </Grid.Column>
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
-                                            <span className="label">IPFS address of the model:</span> {kernel.ipfsAddress}
+                                            <span className="label">Current price:</span> {dataset.currentPrice}
+                                        </Grid.Column>
+                                    </Grid.Row>
+                                    <Grid.Row>
+                                        <Grid.Column className="pn-details">
+                                            <span className="label">IPFS address of the model:</span> {dataset.ipfsAddress}
                                         </Grid.Column>
                                     </Grid.Row>
                                 </Grid>
@@ -86,17 +91,17 @@ class KernelDetails extends PureComponent {
     }
 };
 
-KernelDetails.propTypes = {
+DatasetDetails.propTypes = {
     isSingleFetching: PropTypes.bool.isRequired,
-    kernel: PropTypes.object
+    dataset: PropTypes.object
 };
 
 const mapStateToProps = (state, props) => {
     const { address } = props.match.params;
     
     return {
-        isSingleFetching: selectors.isKernelSinglesFetching(state),
-        kernel: selectors.getSingleKernelMemoized(state, address)
+        isSingleFetching: selectors.isDatasetSinglesFetching(state),
+        dataset: selectors.getSingleDatasetMemoized(state, address)
     }
 };
 
@@ -104,8 +109,8 @@ const mapDispatchToProps = dispatch => {
 
     return {
         goBackTo: url => dispatch(push(url)),
-        fetchKernel: id => dispatch(actions.fetchSingleKernel(id))
+        fetchDataset: id => dispatch(actions.fetchSingleDataset(id))
     }
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(KernelDetails));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DatasetDetails));

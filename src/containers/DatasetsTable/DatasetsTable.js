@@ -5,35 +5,35 @@ import { connect } from 'react-redux';
 import { Table, Button } from 'semantic-ui-react';
 import { Route, Link, withRouter } from 'react-router-dom';
 import ErrorsBlock from '../../components/ErrorsBlock';
-import KernelDetails from '../../containers/KernelDetails';
+import DatasetDetails from '../../containers/DatasetDetails';
 
 import * as selectors from '../../store/selectors';
 import * as actions from '../../store/actions';
 
-import './KernelsTable.scss';
+import './DatasetsTable.scss';
 
-class KernelsTable extends Component {
+class DatasetsTable extends Component {
 
-    handleRefreshKernels = (e) => {
+    handleRefreshDatasets = (e) => {
         e.preventDefault();
-        this.props.refreshKernels();        
+        this.props.refreshDatasets();        
     };
 
     componentWillMount = () => {
         
-        if (!this.props.kernels || this.props.kernels.length === 0) {
+        if (!this.props.datasets || this.props.datasets.length === 0) {
 
-            this.props.refreshKernels();        
+            this.props.refreshDatasets();        
         }        
     };
 
     render() {
-        const { isFetching, kernels, errors, match } = this.props;
+        const { isFetching, datasets, errors, match } = this.props;
 
         return (
             <div>
                 <div>
-                    <Route path={`${match.path}/:address`} component={KernelDetails}/>                    
+                    <Route path={`${match.path}/:address`} component={DatasetDetails}/>                    
                 </div>                
                 <Table inverted celled selectable unstackable>
                     <Table.Header>
@@ -41,18 +41,19 @@ class KernelsTable extends Component {
                             <Table.HeaderCell width={1}>Id</Table.HeaderCell>
                             <Table.HeaderCell>Address</Table.HeaderCell>
                             <Table.HeaderCell width={2}>Dim</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Compl</Table.HeaderCell>
+                            <Table.HeaderCell width={2}>Samples</Table.HeaderCell>
+                            <Table.HeaderCell width={2}>Batches</Table.HeaderCell>
                             <Table.HeaderCell width={2}>Price</Table.HeaderCell>
                         </Table.Row>                            
                     </Table.Header>
                     <Table.Body>
-                        {(!kernels || kernels.length === 0) &&
+                        {(!datasets || datasets.length === 0) &&
                             <Table.Row>
-                                <Table.Cell colSpan="5">Nothing to display</Table.Cell>
+                                <Table.Cell colSpan="6">Nothing to display</Table.Cell>
                             </Table.Row>
                         }
-                        {kernels && kernels.length > 0 &&
-                            kernels.map(kernel => (
+                        {datasets && datasets.length > 0 &&
+                            datasets.map(kernel => (
                                 <Table.Row key={kernel.address}>
                                     <Table.Cell>{kernel.id}</Table.Cell>
                                     <Table.Cell title={kernel.address}>
@@ -65,7 +66,8 @@ class KernelsTable extends Component {
                                         
                                     </Table.Cell>
                                     <Table.Cell>{kernel.dataDim}</Table.Cell>
-                                    <Table.Cell>{kernel.complexity}</Table.Cell>
+                                    <Table.Cell>{kernel.samplesCount}</Table.Cell>
+                                    <Table.Cell>{kernel.batchesCount}</Table.Cell>
                                     <Table.Cell>{kernel.currentPrice}</Table.Cell>
                                 </Table.Row> 
                             ))
@@ -76,9 +78,9 @@ class KernelsTable extends Component {
                             <Table.Cell colSpan="5">
                                 <Button 
                                     loading={isFetching}
-                                    onClick={this.handleRefreshKernels}>Refresh</Button>
+                                    onClick={this.handleRefreshDatasets}>Refresh</Button>
                                 {isFetching &&
-                                    <span>Fetching of kernels...</span>
+                                    <span>Fetching of datasets...</span>
                                 }
                             </Table.Cell>
                         </Table.Row>
@@ -90,32 +92,32 @@ class KernelsTable extends Component {
     }
 }
 
-KernelsTable.propTypes = {
+DatasetsTable.propTypes = {
     errors: PropTypes.array.isRequired,
     dismissError: PropTypes.func.isRequired
 };
 
-KernelsTable.defaultProps = {
+DatasetsTable.defaultProps = {
     isFetching: false,
-    kernels: [],
+    datasets: [],
     errors: []
 };
 
 const mapStateToProps = state => {
 
     return {
-        isFetching: selectors.isKernelsFetching(state),
-        kernels: selectors.getKernels(state),
-        errors: selectors.kernelsErrors(state)
+        isFetching: selectors.isDatasetsFetching(state),
+        datasets: selectors.getDatasets(state),
+        errors: selectors.datasetsErrors(state)
     }
 };
 
 const mapDispatchToProps = dispatch => {
 
     return {
-        refreshKernels: () => dispatch(actions.kernelsFetch()),
-        dismissError: index => dispatch(actions.removeKernelsError(index))
+        refreshDatasets: () => dispatch(actions.datasetsFetch()),
+        dismissError: index => dispatch(actions.removeDatasetsError(index))
     }
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(KernelsTable));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DatasetsTable));

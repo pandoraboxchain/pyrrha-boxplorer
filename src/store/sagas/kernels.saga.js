@@ -1,4 +1,4 @@
-import { fork, put, call, select, takeLatest } from 'redux-saga/effects';
+import { fork, put, select, takeLatest } from 'redux-saga/effects';
 
 import * as services from '../../services';
 import * as actions from '../actions';
@@ -16,7 +16,29 @@ function* startKernelsFetch() {
 
         yield put(actions.kernelsReceived(response.kernels));
 
-        if (Array.isArray(response.error)) {
+        if (Array.isArray(response.error) && response.error.length > 0) {
+
+            yield put(actions.kernelsError(response.error.map(({ error }) => new Error(error))));
+        }
+
+    } catch(err) {
+        yield put(actions.kernelsError(err));
+    }
+}
+
+function* startSingleKernelFetch(req) {
+
+    try {
+        const response = yield services.callApi(`kernels/address/${req.address}`);
+
+        if (!response) {
+
+            return yield put(actions.kernelsError(new Error('Wrong response')));
+        }
+
+        yield put(actions.kernelSingleReceived(response));
+
+        if (Array.isArray(response.error) && response.error.length > 0) {
 
             yield put(actions.kernelsError(response.error.map(({ error }) => new Error(error))));
         }
@@ -38,6 +60,7 @@ function* initKernels() {
 function* watchRouter() {
     yield takeLatest('persist/REHYDRATE', initKernels);// Start if REHYDRATE process done only
     yield takeLatest('KERNELS_FETCH', startKernelsFetch);
+    yield takeLatest('KERNELS_SINGLE_FETCH', startSingleKernelFetch);
 }
 
 // Default set of sagas

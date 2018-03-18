@@ -16,7 +16,29 @@ import rootSaga from './sagas';
 const kernelsBacklist = createPersistStorageFilter(
     'kernels',
     [
-        'isFetching'
+        'isFetching',
+        'isSingleFetching'
+    ]
+);
+const datasetsBacklist = createPersistStorageFilter(
+    'datasets',
+    [
+        'isFetching',
+        'isSingleFetching'
+    ]
+);
+const workersBacklist = createPersistStorageFilter(
+    'workers',
+    [
+        'isFetching',
+        'isSingleFetching'
+    ]
+);
+const jobsBacklist = createPersistStorageFilter(
+    'jobs',
+    [
+        'isFetching',
+        'isSingleFetching'
     ]
 );
 
@@ -26,7 +48,10 @@ const persistConfig = {
     storage,
     stateReconciler: autoMergeLevel2,
     transforms: [
-        kernelsBacklist
+        kernelsBacklist,
+        datasetsBacklist,
+        workersBacklist,
+        jobsBacklist
     ],
     blacklist: ['router'] // exclude some states
 };

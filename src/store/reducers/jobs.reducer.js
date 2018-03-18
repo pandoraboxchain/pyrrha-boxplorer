@@ -1,22 +1,22 @@
 import { addRecordsByProperty } from '../../utils';
 
 import {
-    KERNELS_FETCH,
-    KERNELS_RECEIVED,
-    KERNELS_ERROR,
-    KERNELS_MESSAGE,
-    KERNELS_REMOVE_MESSAGE,
-    KERNELS_REMOVE_ERROR,
-    KERNELS_CLEAN_MESSAGES,
-    KERNELS_CLEAN_ERRORS,
-    KERNELS_SINGLE_FETCH,
-    KERNELS_SINGLE_RECIEVED
+    JOBS_FETCH,
+    JOBS_RECEIVED,
+    JOBS_ERROR,
+    JOBS_MESSAGE,
+    JOBS_REMOVE_MESSAGE,
+    JOBS_REMOVE_ERROR,
+    JOBS_CLEAN_MESSAGES,
+    JOBS_CLEAN_ERRORS,
+    JOBS_SINGLE_FETCH,
+    JOBS_SINGLE_RECIEVED
 } from '../actions';
 
 const initialState = {
     isFetching: false,
     isSingleFetching: false,
-    kernels: [],
+    jobs: [],
     messages: [],
     errorMessages: []
 };
@@ -25,35 +25,35 @@ export const reduce = (state = initialState, action = {}) => {
 
     switch (action.type) {
         
-        case KERNELS_FETCH:
+        case JOBS_FETCH:
             return { 
                 ...state,
                 isFetching: true,
                 errorMessages: []
             };
 
-        case KERNELS_SINGLE_FETCH:
+        case JOBS_SINGLE_FETCH:
             return { 
                 ...state,
                 isSingleFetching: true,
                 errorMessages: []
             };
         
-        case KERNELS_RECEIVED:
+        case JOBS_RECEIVED:
             return {
                 ...state,
                 isFetching: false,
-                kernels: action.kernels
+                jobs: action.jobs
             };
 
-        case KERNELS_SINGLE_RECIEVED:
+        case JOBS_SINGLE_RECIEVED:
             return {
                 ...state,
                 isSingleFetching: false,
-                kernels: addRecordsByProperty([action.record], state.kernels, 'address')
+                jobs: addRecordsByProperty([action.record], state.jobs, 'address')
             };
 
-        case KERNELS_MESSAGE:
+        case JOBS_MESSAGE:
 
             if (action.message && !Array.isArray(action.message)) {
                 action.message = [action.message];
@@ -67,19 +67,19 @@ export const reduce = (state = initialState, action = {}) => {
                 ]
             };
 
-        case KERNELS_REMOVE_MESSAGE:
+        case JOBS_REMOVE_MESSAGE:
             return { 
                 ...state,
                 messages: state.messages.filter((item, index) => (index !== (action.index !== undefined ? action.index : index)))
             };
 
-        case KERNELS_CLEAN_MESSAGES:
+        case JOBS_CLEAN_MESSAGES:
             return {
                 ...state,
                 messages: []
             };
         
-        case KERNELS_ERROR:
+        case JOBS_ERROR:
             let errors = [];
 
             if (Array.isArray(action.error)) {
@@ -98,13 +98,13 @@ export const reduce = (state = initialState, action = {}) => {
                 ]
             };
 
-        case KERNELS_REMOVE_ERROR:
+        case JOBS_REMOVE_ERROR:
             return { 
                 ...state,
                 errorMessages: state.errorMessages.filter((item, index) => (index !== (action.index !== undefined ? action.index : index)))
             };
 
-        case KERNELS_CLEAN_ERRORS:
+        case JOBS_CLEAN_ERRORS:
             return {
                 ...state,
                 errorMessages: []

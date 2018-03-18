@@ -10,9 +10,9 @@ import * as actions from '../../store/actions';
 import { Message, Segment, Grid, Transition } from 'semantic-ui-react';
 import Loading from '../../components/Loading';
 
-import './KernelDetails.scss';
+import './WorkerDetails.scss';
 
-class KernelDetails extends PureComponent {
+class WorkerDetails extends PureComponent {
 
     state = {
         visible: false
@@ -20,9 +20,9 @@ class KernelDetails extends PureComponent {
 
     componentWillMount() {
 
-        if (!this.props.kernel) {
+        if (!this.props.worker) {
 
-            this.props.fetchKernel(this.props.match.params.address);
+            this.props.fetchWorker(this.props.match.params.address);
         }
     }
 
@@ -32,48 +32,48 @@ class KernelDetails extends PureComponent {
         });
     }
 
-    handleDismissClick = e => this.props.goBackTo('/kernels');
+    handleDismissClick = e => this.props.goBackTo('/workers');
 
     render() {
 
-        const { isSingleFetching, kernel } = this.props;
+        const { isSingleFetching, worker } = this.props;
 
         return(
             <div>
-                {(!kernel || isSingleFetching) &&
+                {(!worker || isSingleFetching) &&
                     <Loading />
                 }
-                {kernel &&
+                {worker &&
                     <Transition 
                         visible={this.state.visible} 
                         animation='swing up' 
                         duration={150}>
-                        <Message
+                        <Message 
                             color="black" 
                             onDismiss={this.handleDismissClick}>
                             <Segment inverted>
                                 <Grid columns='equal'>
                                     <Grid.Row>
                                         <Grid.Column width={13} className="pn-details top">
-                                            <span className="label">Kernel</span>: {kernel.address}
+                                            <span className="label">Worker</span>: {worker.address}
                                         </Grid.Column>
                                         <Grid.Column className="pn-details pn-right">
-                                            <span className="label">Dimension:</span> {kernel.dataDim}
+                                            <span className="label">Status:</span> {worker.currentState}
                                         </Grid.Column>
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
-                                            <span className="label">Complexity:</span> {kernel.complexity}                                
+                                            <span className="label">Reputation:</span> {worker.reputation}                                
                                         </Grid.Column>
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
-                                            <span className="label">Current price:</span> {kernel.currentPrice}
+                                            <span className="label">Current job:</span> {worker.currentJob || 'no'}
                                         </Grid.Column>
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
-                                            <span className="label">IPFS address of the model:</span> {kernel.ipfsAddress}
+                                            <span className="label">Job Status:</span> {worker.currentJobStatus}
                                         </Grid.Column>
                                     </Grid.Row>
                                 </Grid>
@@ -86,17 +86,17 @@ class KernelDetails extends PureComponent {
     }
 };
 
-KernelDetails.propTypes = {
+WorkerDetails.propTypes = {
     isSingleFetching: PropTypes.bool.isRequired,
-    kernel: PropTypes.object
+    worker: PropTypes.object
 };
 
 const mapStateToProps = (state, props) => {
     const { address } = props.match.params;
     
     return {
-        isSingleFetching: selectors.isKernelSinglesFetching(state),
-        kernel: selectors.getSingleKernelMemoized(state, address)
+        isSingleFetching: selectors.isWorkerSinglesFetching(state),
+        worker: selectors.getSingleWorkerMemoized(state, address)
     }
 };
 
@@ -104,8 +104,8 @@ const mapDispatchToProps = dispatch => {
 
     return {
         goBackTo: url => dispatch(push(url)),
-        fetchKernel: id => dispatch(actions.fetchSingleKernel(id))
+        fetchWorker: id => dispatch(actions.fetchSingleWorker(id))
     }
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(KernelDetails));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(WorkerDetails));

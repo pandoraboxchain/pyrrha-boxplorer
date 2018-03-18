@@ -5,68 +5,68 @@ import { connect } from 'react-redux';
 import { Table, Button } from 'semantic-ui-react';
 import { Route, Link, withRouter } from 'react-router-dom';
 import ErrorsBlock from '../../components/ErrorsBlock';
-import KernelDetails from '../../containers/KernelDetails';
+import JobDetails from '../../containers/JobDetails';
 
 import * as selectors from '../../store/selectors';
 import * as actions from '../../store/actions';
 
-import './KernelsTable.scss';
+import './JobsTable.scss';
 
-class KernelsTable extends Component {
+class JobsTable extends Component {
 
-    handleRefreshKernels = (e) => {
+    handleRefreshJobs = (e) => {
         e.preventDefault();
-        this.props.refreshKernels();        
+        this.props.refreshJobs();        
     };
 
     componentWillMount = () => {
         
-        if (!this.props.kernels || this.props.kernels.length === 0) {
+        if (!this.props.jobs || this.props.jobs.length === 0) {
 
-            this.props.refreshKernels();        
+            this.props.refreshJobs();        
         }        
     };
 
     render() {
-        const { isFetching, kernels, errors, match } = this.props;
+        const { isFetching, jobs, errors, match } = this.props;
 
         return (
             <div>
                 <div>
-                    <Route path={`${match.path}/:address`} component={KernelDetails}/>                    
+                    <Route path={`${match.path}/:address`} component={JobDetails}/>                    
                 </div>                
                 <Table inverted celled selectable unstackable>
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell width={1}>Id</Table.HeaderCell>
                             <Table.HeaderCell>Address</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Dim</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Compl</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Price</Table.HeaderCell>
+                            <Table.HeaderCell width={2}>Status</Table.HeaderCell>
+                            <Table.HeaderCell width={2}>Baches</Table.HeaderCell>
+                            <Table.HeaderCell width={2}>Progress</Table.HeaderCell>
                         </Table.Row>                            
                     </Table.Header>
                     <Table.Body>
-                        {(!kernels || kernels.length === 0) &&
+                        {(!jobs || jobs.length === 0) &&
                             <Table.Row>
                                 <Table.Cell colSpan="5">Nothing to display</Table.Cell>
                             </Table.Row>
                         }
-                        {kernels && kernels.length > 0 &&
-                            kernels.map(kernel => (
-                                <Table.Row key={kernel.address}>
-                                    <Table.Cell>{kernel.id}</Table.Cell>
-                                    <Table.Cell title={kernel.address}>
+                        {jobs && jobs.length > 0 &&
+                            jobs.map(job => (
+                                <Table.Row key={job.address}>
+                                    <Table.Cell>{job.id}</Table.Cell>
+                                    <Table.Cell title={job.address}>
                                         <Link to={{
-                                            pathname: `${match.url}/${kernel.address}`,
+                                            pathname: `${match.url}/${job.address}`,
                                             state: {
                                                 prevPath: this.props.location.pathname
                                             } 
-                                        }}>{kernel.address}</Link>
+                                        }}>{job.address}</Link>
                                         
                                     </Table.Cell>
-                                    <Table.Cell>{kernel.dataDim}</Table.Cell>
-                                    <Table.Cell>{kernel.complexity}</Table.Cell>
-                                    <Table.Cell>{kernel.currentPrice}</Table.Cell>
+                                    <Table.Cell>{job.currentState}</Table.Cell>
+                                    <Table.Cell>{job.batches}</Table.Cell>
+                                    <Table.Cell>{job.progress}</Table.Cell>
                                 </Table.Row> 
                             ))
                         }               
@@ -76,9 +76,9 @@ class KernelsTable extends Component {
                             <Table.Cell colSpan="5">
                                 <Button 
                                     loading={isFetching}
-                                    onClick={this.handleRefreshKernels}>Refresh</Button>
+                                    onClick={this.handleRefreshJobs}>Refresh</Button>
                                 {isFetching &&
-                                    <span>Fetching of kernels...</span>
+                                    <span>Fetching of jobs...</span>
                                 }
                             </Table.Cell>
                         </Table.Row>
@@ -90,32 +90,34 @@ class KernelsTable extends Component {
     }
 }
 
-KernelsTable.propTypes = {
+JobsTable.propTypes = {
     errors: PropTypes.array.isRequired,
     dismissError: PropTypes.func.isRequired
 };
 
-KernelsTable.defaultProps = {
+JobsTable.defaultProps = {
     isFetching: false,
-    kernels: [],
+    jobs: [],
     errors: []
 };
 
 const mapStateToProps = state => {
 
+    console.log(state)
+
     return {
-        isFetching: selectors.isKernelsFetching(state),
-        kernels: selectors.getKernels(state),
-        errors: selectors.kernelsErrors(state)
+        isFetching: selectors.isJobsFetching(state),
+        jobs: selectors.getJobs(state),
+        errors: selectors.jobsErrors(state)
     }
 };
 
 const mapDispatchToProps = dispatch => {
 
     return {
-        refreshKernels: () => dispatch(actions.kernelsFetch()),
-        dismissError: index => dispatch(actions.removeKernelsError(index))
+        refreshJobs: () => dispatch(actions.jobsFetch()),
+        dismissError: index => dispatch(actions.removeJobsError(index))
     }
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(KernelsTable));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(JobsTable));
