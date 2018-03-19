@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 
-import { Loader, Table } from 'semantic-ui-react';
+import { Loader, Table, Icon } from 'semantic-ui-react';
+import './AddressTable.scss';
 
 class AddressTable extends PureComponent {    
 
@@ -19,10 +20,11 @@ class AddressTable extends PureComponent {
         return (
             <div>
                 <Loader size="large" active={isFetching} />
-                <Table inverted celled selectable stackable>
+                <Table inverted celled selectable unstackable>
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell colSpan="2">
+                            <Table.HeaderCell><Icon name="chevron right" /></Table.HeaderCell>
+                            <Table.HeaderCell>
                                 <Link to={detailsPath}><h3>{header}</h3></Link>                                        
                             </Table.HeaderCell>
                         </Table.Row>
@@ -41,7 +43,7 @@ class AddressTable extends PureComponent {
                             (records.map(record => (
                                 <Table.Row key={record.address}>
                                     <Table.Cell>{record.id}</Table.Cell>
-                                    <Table.Cell title={record.address}>
+                                    <Table.Cell title={record.address} className="pn-text-ellipsis">
                                         <Link to={{
                                             pathname: `${detailsPath}/${record.address}`,
                                             state: {

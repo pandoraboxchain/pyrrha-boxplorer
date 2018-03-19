@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import KernelsTable from '../../containers/KernelsTable';
+import KernelsTable from '../../containers/KernelsTable/KernelsTable';
 
 export default class Kernels extends Component {
 

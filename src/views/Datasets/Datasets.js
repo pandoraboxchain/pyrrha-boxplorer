@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import DatasetsTable from '../../containers/DatasetsTable';
+import DatasetsTable from '../../containers/DatasetsTable/DatasetsTable';
 
 export default class Datasets extends Component {
 

@@ -4,6 +4,8 @@ import './App.scss';
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import pack from '../../../package.json'
+
 import { Container } from 'semantic-ui-react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -26,7 +28,7 @@ export default class App extends Component {
                         ))}
                     </Switch>
                 </Container>
-                <Footer />
+                <Footer version={pack.version} />
             </div>
         );
     }

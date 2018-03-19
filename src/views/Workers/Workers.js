@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import WorkersTable from '../../containers/WorkersTable';
+import WorkersTable from '../../containers/WorkersTable/WorkersTable';
 
 export default class Workers extends Component {
 
