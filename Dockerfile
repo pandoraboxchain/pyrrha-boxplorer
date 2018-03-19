@@ -3,7 +3,6 @@ FROM node:9
 LABEL maintainer="kostysh@gmail.com"
 
 COPY ./public /public
-COPY ./pyrrha-abi /pyrrha-abi
 COPY ./src /src
 COPY ./config-overrides.js /config-overrides.js
 COPY ./package.json /package.json
