@@ -103,8 +103,6 @@ WorkersTable.defaultProps = {
 
 const mapStateToProps = state => {
 
-    console.log(state)
-
     return {
         isFetching: selectors.isWorkersFetching(state),
         workers: selectors.getWorkers(state),

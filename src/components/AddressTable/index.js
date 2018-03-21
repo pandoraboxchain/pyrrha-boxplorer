@@ -13,8 +13,7 @@ class AddressTable extends PureComponent {
             header,
             detailsPath,
             isFetching,
-            records, 
-            errors
+            records
         } = this.props;
 
         return (
