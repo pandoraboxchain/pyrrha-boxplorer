@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { Message } from 'semantic-ui-react';
 
+import './ErrorsBlock.scss';
+
 class ErrorsBlock extends PureComponent {
 
     handleErrorDismiss = (e, { index }) => this.props.dismissError(index);
@@ -15,7 +17,7 @@ class ErrorsBlock extends PureComponent {
             <div>
                 {errors.length > 0 &&
                     (errors.map((msg, index) => 
-                        <div key={index}>
+                        <div key={index} className="pn-mt-5">
                             <Message
                                 index={index}
                                 error

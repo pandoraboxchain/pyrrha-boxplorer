@@ -105,6 +105,8 @@ DatasetsTable.defaultProps = {
 
 const mapStateToProps = state => {
 
+    console.log('>>>', selectors.datasetsErrors(state))
+
     return {
         isFetching: selectors.isDatasetsFetching(state),
         datasets: selectors.getDatasets(state),

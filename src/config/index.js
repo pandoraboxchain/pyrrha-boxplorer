@@ -1,7 +1,7 @@
 const hosts = {
     default: {
         protocol: 'http',
-        host: 'localhost',
+        host: 'api.pandora.network',
         port: 1111,
         wsport: 1337
     },

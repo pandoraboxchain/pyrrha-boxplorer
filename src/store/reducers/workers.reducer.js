@@ -94,7 +94,7 @@ export const reduce = (state = initialState, action = {}) => {
                 isFetching: false,
                 errorMessages: [
                     ...state.errorMessages,
-                    errors
+                    ...errors
                 ]
             };
 
