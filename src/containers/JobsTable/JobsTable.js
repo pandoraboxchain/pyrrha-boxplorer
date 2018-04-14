@@ -38,7 +38,6 @@ class JobsTable extends Component {
                 <Table inverted celled selectable unstackable>
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell width={1}>Id</Table.HeaderCell>
                             <Table.HeaderCell>Address</Table.HeaderCell>
                             <Table.HeaderCell width={2}>Status</Table.HeaderCell>
                             <Table.HeaderCell width={2}>Baches</Table.HeaderCell>
@@ -54,7 +53,6 @@ class JobsTable extends Component {
                         {jobs && jobs.length > 0 &&
                             jobs.map(job => (
                                 <Table.Row key={job.address}>
-                                    <Table.Cell>{job.id}</Table.Cell>
                                     <Table.Cell title={job.address}>
                                         <Link to={{
                                             pathname: `${match.url}/${job.address}`,
@@ -102,8 +100,6 @@ JobsTable.defaultProps = {
 };
 
 const mapStateToProps = state => {
-
-    console.log(state)
 
     return {
         isFetching: selectors.isJobsFetching(state),

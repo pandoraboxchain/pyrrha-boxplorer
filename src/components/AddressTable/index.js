@@ -39,9 +39,9 @@ class AddressTable extends PureComponent {
                             </Table.Row>
                         }
                         {(records && records.length > 0) &&
-                            (records.map(record => (
+                            (records.map((record, index) => (
                                 <Table.Row key={record.address}>
-                                    <Table.Cell>{record.id}</Table.Cell>
+                                    <Table.Cell>{index}</Table.Cell>
                                     <Table.Cell title={record.address} className="pn-text-ellipsis">
                                         <Link to={{
                                             pathname: `${detailsPath}/${record.address}`,

@@ -23,8 +23,6 @@ const initialState = {
 
 export const reduce = (state = initialState, action = {}) => {
 
-    // console.log(action)
-
     switch (action.type) {
         
         case DATASETS_FETCH:

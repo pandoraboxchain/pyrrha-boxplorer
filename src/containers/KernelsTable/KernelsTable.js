@@ -38,7 +38,6 @@ class KernelsTable extends Component {
                 <Table inverted celled selectable unstackable>
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell width={1}>Id</Table.HeaderCell>
                             <Table.HeaderCell>Address</Table.HeaderCell>
                             <Table.HeaderCell width={2}>Dim</Table.HeaderCell>
                             <Table.HeaderCell width={2}>Compl</Table.HeaderCell>
@@ -54,7 +53,6 @@ class KernelsTable extends Component {
                         {kernels && kernels.length > 0 &&
                             kernels.map(kernel => (
                                 <Table.Row key={kernel.address}>
-                                    <Table.Cell>{kernel.id}</Table.Cell>
                                     <Table.Cell title={kernel.address}>
                                         <Link to={{
                                             pathname: `${match.url}/${kernel.address}`,

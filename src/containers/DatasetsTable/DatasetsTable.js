@@ -38,7 +38,6 @@ class DatasetsTable extends Component {
                 <Table inverted celled selectable unstackable>
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell width={1}>Id</Table.HeaderCell>
                             <Table.HeaderCell>Address</Table.HeaderCell>
                             <Table.HeaderCell width={2}>Dim</Table.HeaderCell>
                             <Table.HeaderCell width={2}>Samples</Table.HeaderCell>
@@ -53,22 +52,21 @@ class DatasetsTable extends Component {
                             </Table.Row>
                         }
                         {datasets && datasets.length > 0 &&
-                            datasets.map(kernel => (
-                                <Table.Row key={kernel.address}>
-                                    <Table.Cell>{kernel.id}</Table.Cell>
-                                    <Table.Cell title={kernel.address}>
+                            datasets.map(dataset => (
+                                <Table.Row key={dataset.address}>
+                                    <Table.Cell title={dataset.address}>
                                         <Link to={{
-                                            pathname: `${match.url}/${kernel.address}`,
+                                            pathname: `${match.url}/${dataset.address}`,
                                             state: {
                                                 prevPath: this.props.location.pathname
                                             } 
-                                        }}>{kernel.address}</Link>
+                                        }}>{dataset.address}</Link>
                                         
                                     </Table.Cell>
-                                    <Table.Cell>{kernel.dataDim}</Table.Cell>
-                                    <Table.Cell>{kernel.samplesCount}</Table.Cell>
-                                    <Table.Cell>{kernel.batchesCount}</Table.Cell>
-                                    <Table.Cell>{kernel.currentPrice}</Table.Cell>
+                                    <Table.Cell>{dataset.dataDim}</Table.Cell>
+                                    <Table.Cell>{dataset.samplesCount}</Table.Cell>
+                                    <Table.Cell>{dataset.batchesCount}</Table.Cell>
+                                    <Table.Cell>{dataset.currentPrice}</Table.Cell>
                                 </Table.Row> 
                             ))
                         }               

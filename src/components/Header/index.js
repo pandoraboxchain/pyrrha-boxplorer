@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 
 import { Menu, Container } from 'semantic-ui-react';
 import { Link, NavLink, withRouter } from 'react-router-dom';
+import SocketStatus from '../../containers/SocketStatus';
 
 import routes from '../../router';
 
@@ -13,7 +14,7 @@ class Header extends Component {
         return (
             <div>
                 <Container>
-                    <Menu fixed="top" className="pn-header">
+                    <Menu fixed="top" inverted className="pn-header">
                         <Menu.Item header>
                             <Link to="/"><h1 className="pn-head-title">Pyrrha Boxplorer</h1></Link>
                         </Menu.Item>            
@@ -26,6 +27,9 @@ class Header extends Component {
                                     activeClassName="selected">{route.label}</NavLink>
                             </Menu.Item>
                         ))}
+                        <Menu.Item position="right">
+                            <SocketStatus />
+                        </Menu.Item>
                     </Menu>
                 </Container>
             </div>

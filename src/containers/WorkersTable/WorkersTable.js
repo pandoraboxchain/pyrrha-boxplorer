@@ -38,7 +38,6 @@ class WorkersTable extends Component {
                 <Table inverted celled selectable unstackable>
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell width={1}>Id</Table.HeaderCell>
                             <Table.HeaderCell>Address</Table.HeaderCell>
                             <Table.HeaderCell width={2}>Status</Table.HeaderCell>
                             <Table.HeaderCell width={2}>Reputation</Table.HeaderCell>
@@ -54,7 +53,6 @@ class WorkersTable extends Component {
                         {workers && workers.length > 0 &&
                             workers.map(worker => (
                                 <Table.Row key={worker.address}>
-                                    <Table.Cell>{worker.id}</Table.Cell>
                                     <Table.Cell title={worker.address}>
                                         <Link to={{
                                             pathname: `${match.url}/${worker.address}`,

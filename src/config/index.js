@@ -13,7 +13,7 @@ const hosts = {
     }
 };
 
-let useHost = process.env.USE_DEFAULT || 'default';
+let useHost = process.env.REACT_APP_USE_HOST || 'default';
 
 const config = {
     ...hosts.default,
@@ -22,6 +22,8 @@ const config = {
 
 // env overrides
 export default {
+    wsReconnectTimeout: 2000,
+    wsReconnectCount: 20,
     protocol: process.env.REACT_APP_BOXPROXY_PROTOCOL || config.protocol,
     host: process.env.REACT_APP_BOXPROXY_HOST || config.host,
     port: process.env.REACT_APP_BOXPROXY_PORT || config.port,

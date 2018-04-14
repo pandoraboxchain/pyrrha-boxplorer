@@ -4,12 +4,10 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import { configureStore, history } from './store';
+import { store, persistor, history } from './store';
 import registerServiceWorker from './registerServiceWorker';
 
 import App from './views/App';
-
-const { store, persistor } = configureStore();
 
 const PersistApp = () => (
     <PersistGate loading={<div />} persistor={persistor}>

@@ -53,31 +53,27 @@ const persistConfig = {
         workersBacklist,
         jobsBacklist
     ],
-    blacklist: ['router'] // exclude some states
+    blacklist: ['router', 'websocket'] // exclude some states
 };
 
 export const history = createHistory();
 
-export function configureStore(initialState, rehydrated = () => {}) {    
-    const sagaMiddleware = createSagaMiddleware();
-    const composeEnhancers = process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? 
-        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : 
-        compose;
-    const combinedReducers = combineReducers({
-        router: routerReducer,
-        ...rootReducer
-    });
-    const persistedReducer = persistReducer(persistConfig, combinedReducers);
+const sagaMiddleware = createSagaMiddleware();
+const composeEnhancers = process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? 
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : 
+    compose;
+const combinedReducers = combineReducers({
+    router: routerReducer,
+    ...rootReducer
+});
+const persistedReducer = persistReducer(persistConfig, combinedReducers);
 
-    const store = createStore(
-        persistedReducer,
-        initialState,
-        composeEnhancers(applyMiddleware(sagaMiddleware, routerMiddleware(history)))
-    );
+export const store = createStore(
+    persistedReducer,
+    undefined,
+    composeEnhancers(applyMiddleware(sagaMiddleware, routerMiddleware(history)))
+);
 
-    const persistor = persistStore(store, null, rehydrated);
+export const persistor = persistStore(store, null, () => {});
 
-    sagaMiddleware.run(rootSaga);
-
-    return { store, persistor };
-}
+sagaMiddleware.run(rootSaga);

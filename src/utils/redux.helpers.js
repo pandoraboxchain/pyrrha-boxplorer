@@ -83,6 +83,6 @@ export const addRecordsByProperty = (source = [], target = [], property) => {
         ...sourceObj,
         ...targetObj
     };
-
+    
     return Object.keys(commonObj).map(key => commonObj[key]);
 };
