@@ -13,7 +13,7 @@ function rewireSass(config) {
         use: [...(cssLoader.loader || cssLoader.use), 'sass-loader']
     };
 
-    const babelLoader = rewired.getBabelLoader(config.module.rules);
+    // const babelLoader = rewired.getBabelLoader(config.module.rules);
     
     // oneOf = oneOf.filter(i => {
 

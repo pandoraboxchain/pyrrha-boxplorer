@@ -1,3 +1,5 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d9f5f23d248b488b8a6e5c424ce66e9a)](https://www.codacy.com/app/kostysh/pyrrha-boxplorer?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pandoraboxchain/pyrrha-boxplorer&amp;utm_campaign=Badge_Grade) [![Build Status](https://travis-ci.org/pandoraboxchain/pyrrha-boxplorer.svg?branch=master)](https://travis-ci.org/pandoraboxchain/pyrrha-boxplorer)  
+
 # PandoraBoxChain Explorer Web Application
 
 ## Initializing and start
