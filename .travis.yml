@@ -6,31 +6,35 @@ services:
   - docker
 branches:
   only:
-  - master
-  - "/v\\d+\\.\\d+\\.\\d+(-\\w+)?/"
+    - master
+    - "/v\\d+\\.\\d+\\.\\d+(-\\w+)?/"
 stages:
   - build
   - hub
   - deploy
 jobs:
   include:
-  - stage: build
-    install: skip
-    script:
-      - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-      - docker build --tag pyrrha_boxplorer .
-      - docker images      
-  - stage: hub
-    if: tag IS present
-    install: skip
-    script:
-      - docker tag pyrrha_boxplorer pandoraboxchain/pyrrha_boxplorer:latest
-      - docker push pandoraboxchain/pyrrha_boxplorer:latest
-  - stage: deploy
-    if: tag IS present
-    install: skip
-    script:
-      - openssl aes-256-cbc -K $encrypted_d7f89b072dc3_key -iv $encrypted_d7f89b072dc3_iv -in key.enc -out ./key -d
-      - chmod 600 ./key
-      - ssh -o "StrictHostKeyChecking no" -i ./key kostysh@pandora.network -tt 'bash
-        -s' < ./deploy.sh 
+    - stage: build
+      if: branch = master
+      install: skip
+      script:
+        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+        - docker build --tag pyrrha_boxplorer .
+        - docker images
+    - stage: hub
+      if: tag IS present
+      install: skip
+      script:
+        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+        - docker build --tag pyrrha_boxplorer .
+        - docker images
+        - docker tag pyrrha_boxplorer pandoraboxchain/pyrrha_boxplorer:latest
+        - docker push pandoraboxchain/pyrrha_boxplorer:latest
+    - stage: deploy
+      if: tag IS present
+      install: skip
+      script:
+        - openssl aes-256-cbc -K $encrypted_d7f89b072dc3_key -iv $encrypted_d7f89b072dc3_iv -in key.enc -out key -d
+        - chmod 600 ./key
+        - ssh -o "StrictHostKeyChecking no" -i ./key kostysh@pandora.network -tt 'bash
+          -s' < ./deploy.sh
