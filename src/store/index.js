@@ -53,7 +53,7 @@ const persistConfig = {
         workersBacklist,
         jobsBacklist
     ],
-    blacklist: ['router', 'websocket'] // exclude some states
+    blacklist: ['router', 'common', 'websocket'] // exclude some states
 };
 
 export const history = createHistory();

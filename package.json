@@ -1,6 +1,6 @@
 {
   "name": "pyrrha-boxplorer",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Pandora Pyrrha Boxchain Explorer",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,26 +16,27 @@
   "homepage": "https://pandora.network",
   "author": "Kostiantyn Smyrnov <kostysh@gmail.com>",
   "dependencies": {
-    "history": "^4.7.2",
-    "prop-types": "^15.6.1",
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1",
-    "react-loadable": "^5.3.1",
-    "react-redux": "^5.0.7",
-    "react-router-dom": "^4.2.2",
+    "@babel/polyfill": "^7.0.0-beta.47",
+    "history": "4.7.2",
+    "prop-types": "15.6.1",
+    "react": "16.3.2",
+    "react-dom": "16.3.2",
+    "react-loadable": "5.4.0",
+    "react-redux": "5.0.7",
+    "react-router-dom": "4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
-    "redux": "^3.7.2",
-    "redux-persist": "^5.9.1",
-    "redux-saga": "^0.16.0",
-    "reselect": "^3.0.1",
-    "semantic-ui-css": "^2.3.1",
-    "semantic-ui-react": "^0.79.1"
+    "redux": "4.0.0",
+    "redux-persist": "5.9.1",
+    "redux-saga": "0.16.0",
+    "reselect": "3.0.1",
+    "semantic-ui-css": "2.3.1",
+    "semantic-ui-react": "0.79.1"
   },
   "devDependencies": {
-    "node-sass-chokidar": "^1.2.2",
-    "react-app-rewired": "^2.0.0",
-    "react-scripts": "2.0.0-next.47d2d941",
-    "sass-loader": "^6.0.7"
+    "node-sass-chokidar": "1.3.0",
+    "react-app-rewired": "2.0.0",
+    "react-scripts": "2.0.0-next.66cc7a90",
+    "sass-loader": "7.0.1"
   },
   "keywords": [
     "pandoraboxchain",
