@@ -5,11 +5,13 @@ import { Container, Divider } from 'semantic-ui-react';
 import './Footer.scss';
 
 const Footer = (props) => (
-    <div>
+    <div className="pn-footer">
         <Divider />
         <Container>            
-            <p className="pn-footer-test">Pandora Pyrrha Boxplorer v.{props.version}</p>
-            <BoxproxyVersion />
+            <div className="bp-ver">
+                <a href={`https://github.com/pandoraboxchain/pyrrha-boxplorer/tree/v${props.version}`}>Boxplorer v{props.version}</a>                
+            </div>
+            <BoxproxyVersion className="bp-ver" />
         </Container>        
     </div>
 );

@@ -9,6 +9,7 @@ import JobDetails from '../../containers/JobDetails';
 
 import * as selectors from '../../store/selectors';
 import * as actions from '../../store/actions';
+import { convertJobStatusCode } from '../../utils';
 
 import './JobsTable.scss';
 
@@ -19,7 +20,7 @@ class JobsTable extends Component {
         this.props.refreshJobs();        
     };
 
-    componentWillMount = () => {
+    UNSAFE_componentWillMount = () => {
         
         if (!this.props.jobs || this.props.jobs.length === 0) {
 
@@ -38,10 +39,11 @@ class JobsTable extends Component {
                 <Table inverted celled selectable unstackable>
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell>Address</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Status</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Baches</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Progress</Table.HeaderCell>
+                            <Table.HeaderCell width={4}>Address</Table.HeaderCell>
+                            <Table.HeaderCell width={4}>Description</Table.HeaderCell>
+                            <Table.HeaderCell width={1}>Status</Table.HeaderCell>
+                            <Table.HeaderCell width={1}>Baches</Table.HeaderCell>
+                            <Table.HeaderCell width={1}>Progress</Table.HeaderCell>
                         </Table.Row>                            
                     </Table.Header>
                     <Table.Body>
@@ -62,7 +64,8 @@ class JobsTable extends Component {
                                         }}>{job.address}</Link>
                                         
                                     </Table.Cell>
-                                    <Table.Cell>{job.currentState}</Table.Cell>
+                                    <Table.Cell>{job.description}</Table.Cell>
+                                    <Table.Cell>{convertJobStatusCode(job.jobStatus)}</Table.Cell>
                                     <Table.Cell>{job.batches}</Table.Cell>
                                     <Table.Cell>{job.progress}</Table.Cell>
                                 </Table.Row> 

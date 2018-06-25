@@ -12,10 +12,12 @@ class BoxproxyVersion extends PureComponent {
         return (
             <div>
                 {isConnected &&
-                    <p className="pn-footer-test">Pandora Pyrrha Boxproxy v.{version}</p>    
+                    <p className="pn-footer-test">
+                        <a href={`https://github.com/pandoraboxchain/pyrrha-boxproxy/tree/v${version}`}>Boxproxy v{version}</a>
+                    </p>    
                 }
                 {!isConnected &&
-                    <p className="pn-footer-test">Waiting for Pyrrha Boxproxy mate information...</p>
+                    <p className="pn-footer-test">Waiting for Pyrrha Boxproxy...</p>
                 }
             </div>
         );

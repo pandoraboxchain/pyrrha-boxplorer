@@ -19,7 +19,7 @@ class KernelsTable extends Component {
         this.props.refreshKernels();        
     };
 
-    componentWillMount = () => {
+    UNSAFE_componentWillMount = () => {
         
         if (!this.props.kernels || this.props.kernels.length === 0) {
 
@@ -38,10 +38,11 @@ class KernelsTable extends Component {
                 <Table inverted celled selectable unstackable>
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell>Address</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Dim</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Compl</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Price</Table.HeaderCell>
+                            <Table.HeaderCell width={4}>Address</Table.HeaderCell>
+                            <Table.HeaderCell width={4}>Description</Table.HeaderCell>
+                            <Table.HeaderCell width={1}>Dim</Table.HeaderCell>
+                            <Table.HeaderCell width={1}>Compl</Table.HeaderCell>
+                            <Table.HeaderCell width={1}>Price</Table.HeaderCell>
                         </Table.Row>                            
                     </Table.Header>
                     <Table.Body>
@@ -62,6 +63,7 @@ class KernelsTable extends Component {
                                         }}>{kernel.address}</Link>
                                         
                                     </Table.Cell>
+                                    <Table.Cell>{kernel.description}</Table.Cell>
                                     <Table.Cell>{kernel.dataDim}</Table.Cell>
                                     <Table.Cell>{kernel.complexity}</Table.Cell>
                                     <Table.Cell>{kernel.currentPrice}</Table.Cell>

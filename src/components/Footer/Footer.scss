@@ -1,4 +1,10 @@
-.pn-footer-test {
+.pn-footer {
     font-size: 1.1em;
     color: rgb(196, 196, 196);
+    padding-bottom: 40px;
+
+    .bp-ver {
+        float: left;
+        margin-right: 16px;
+    }
 }

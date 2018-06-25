@@ -6,6 +6,7 @@ import { push } from 'react-router-redux';
 
 import * as selectors from '../../store/selectors';
 import * as actions from '../../store/actions';
+import { convertJobStatusCode } from '../../utils';
 
 import { Message, Segment, Grid, Transition } from 'semantic-ui-react';
 import Loading from '../../components/Loading';
@@ -18,7 +19,7 @@ class JobDetails extends PureComponent {
         visible: false
     };
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
 
         if (!this.props.job) {
 
@@ -54,43 +55,53 @@ class JobDetails extends PureComponent {
                             <Segment inverted>
                                 <Grid columns='equal'>
                                     <Grid.Row>
-                                        <Grid.Column width={13} className="pn-details top">
-                                            <span className="label">Job</span>: {job.address}
+                                        <Grid.Column width={12} className="pn-details top">
+                                            <span className="label">Job: </span>
+                                            <a href={`https://rinkeby.etherscan.io/address/${job.address}`}>{job.address}</a>
                                         </Grid.Column>
-                                        <Grid.Column className="pn-details pn-right">
-                                            <span className="label">Status:</span> {job.jobStatus}
-                                        </Grid.Column>
-                                    </Grid.Row>
-                                    <Grid.Row>
-                                        <Grid.Column className="pn-details">
-                                            <span className="label">Kernel:</span> {job.kernel}                                
+                                        <Grid.Column width={4} className="pn-details pn-right">
+                                            <nobr><span className="label">Status:</span> {convertJobStatusCode(job.jobStatus)}</nobr>
                                         </Grid.Column>
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
-                                            <span className="label">Dataset:</span> {job.dataset}                                
+                                            <span className="label">Kernel: </span> 
+                                            <a href={`https://rinkeby.etherscan.io/address/${job.kernel}`}>{job.kernel}</a>
                                         </Grid.Column>
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
-                                            <span className="label">Batches count:</span> {job.batches}                                
+                                            <span className="label">Dataset: </span> 
+                                            <a href={`https://rinkeby.etherscan.io/address/${job.dataset}`}>{job.dataset}</a>      
                                         </Grid.Column>
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
-                                            <span className="label">Progress:</span> {job.progress}                                
+                                            <span className="label">Batches count: </span> {job.batches}                                
                                         </Grid.Column>
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
-                                            <span className="label">IPFS results:</span> {job.ipfsResults}
+                                            <span className="label">Progress: </span> {job.progress}                                
                                         </Grid.Column>
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
-                                            <span className="label">Active workers count:</span> {job.activeWorkersCount}
+                                            <span className="label">Active workers count: </span> {job.activeWorkersCount}
                                         </Grid.Column>
                                     </Grid.Row>
+                                    <Grid.Row>
+                                        <Grid.Column className="pn-details">
+                                            <span className="label">IPFS results: </span> 
+                                            <ul>
+                                            {job.ipfsResults && Array.isArray(job.ipfsResults) &&
+                                                (job.ipfsResults.map((result, index) => (
+                                                    <li key={index}><a href={`https://gateway.ipfs.io/ipfs/${result}`}>{result}</a></li>
+                                                )))
+                                            }
+                                            </ul>
+                                        </Grid.Column>
+                                    </Grid.Row>                                    
                                 </Grid>
                             </Segment>
                         </Message>

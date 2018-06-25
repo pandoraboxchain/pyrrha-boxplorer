@@ -6,6 +6,7 @@ import { push } from 'react-router-redux';
 
 import * as selectors from '../../store/selectors';
 import * as actions from '../../store/actions';
+import { convertWorkerStatusCode, convertJobStatusCode } from '../../utils';
 
 import { Message, Segment, Grid, Transition } from 'semantic-ui-react';
 import Loading from '../../components/Loading';
@@ -18,7 +19,7 @@ class WorkerDetails extends PureComponent {
         visible: false
     };
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
 
         if (!this.props.worker) {
 
@@ -55,25 +56,27 @@ class WorkerDetails extends PureComponent {
                                 <Grid columns='equal'>
                                     <Grid.Row>
                                         <Grid.Column width={13} className="pn-details top">
-                                            <span className="label">Worker</span>: {worker.address}
+                                            <span className="label">Worker: </span> 
+                                            <a href={`https://rinkeby.etherscan.io/address/${worker.address}`}>{worker.address}</a>
                                         </Grid.Column>
                                         <Grid.Column className="pn-details pn-right">
-                                            <span className="label">Status:</span> {worker.currentState}
+                                            <span className="label">Status:</span> {convertWorkerStatusCode(worker.currentState)}
                                         </Grid.Column>
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
-                                            <span className="label">Reputation:</span> {worker.reputation}                                
+                                            <span className="label">Current job: </span> 
+                                            {worker.currentJob &&
+                                                <a href={`https://rinkeby.etherscan.io/address/${worker.currentJob}`}>{worker.currentJob}</a>
+                                            }
+                                            {!worker.currentJob && 
+                                                <span>no</span>
+                                            }
                                         </Grid.Column>
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
-                                            <span className="label">Current job:</span> {worker.currentJob || 'no'}
-                                        </Grid.Column>
-                                    </Grid.Row>
-                                    <Grid.Row>
-                                        <Grid.Column className="pn-details">
-                                            <span className="label">Job Status:</span> {worker.currentJobStatus}
+                                            <span className="label">Job Status:</span> {convertJobStatusCode(worker.currentJobStatus)}
                                         </Grid.Column>
                                     </Grid.Row>
                                 </Grid>

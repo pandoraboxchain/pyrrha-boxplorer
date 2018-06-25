@@ -19,7 +19,7 @@ class DatasetsTable extends Component {
         this.props.refreshDatasets();        
     };
 
-    componentWillMount = () => {
+    UNSAFE_componentWillMount = () => {
         
         if (!this.props.datasets || this.props.datasets.length === 0) {
 
@@ -38,11 +38,11 @@ class DatasetsTable extends Component {
                 <Table inverted celled selectable unstackable>
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell>Address</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Dim</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Samples</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Batches</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Price</Table.HeaderCell>
+                            <Table.HeaderCell width={4}>Address</Table.HeaderCell>
+                            <Table.HeaderCell width={4}>Description</Table.HeaderCell>
+                            <Table.HeaderCell width={1}>Dim</Table.HeaderCell>
+                            <Table.HeaderCell width={1}>Batches</Table.HeaderCell>
+                            <Table.HeaderCell width={1}>Price</Table.HeaderCell>
                         </Table.Row>                            
                     </Table.Header>
                     <Table.Body>
@@ -63,8 +63,8 @@ class DatasetsTable extends Component {
                                         }}>{dataset.address}</Link>
                                         
                                     </Table.Cell>
+                                    <Table.Cell>{dataset.description}</Table.Cell>
                                     <Table.Cell>{dataset.dataDim}</Table.Cell>
-                                    <Table.Cell>{dataset.samplesCount}</Table.Cell>
                                     <Table.Cell>{dataset.batchesCount}</Table.Cell>
                                     <Table.Cell>{dataset.currentPrice}</Table.Cell>
                                 </Table.Row> 
@@ -73,7 +73,7 @@ class DatasetsTable extends Component {
                     </Table.Body>
                     <Table.Footer>
                         <Table.Row>
-                            <Table.Cell colSpan="5">
+                            <Table.Cell colSpan="6">
                                 <Button 
                                     loading={isFetching}
                                     onClick={this.handleRefreshDatasets}>Refresh</Button>

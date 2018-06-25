@@ -1,10 +1,11 @@
 {
   "name": "pyrrha-boxplorer",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Pandora Pyrrha Boxchain Explorer",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "BROWSER=none REACT_APP_USE_HOST=local npx react-app-rewired start",
+    "start:pan": "BROWSER=none REACT_APP_USE_HOST=default npx react-app-rewired start",
     "build:docker": "docker-compose build --no-cache",
     "start:docker": "docker-compose up -d --remove-orphans",
     "stop:docker": "docker-compose down"
@@ -16,27 +17,27 @@
   "homepage": "https://pandora.network",
   "author": "Kostiantyn Smyrnov <kostysh@gmail.com>",
   "dependencies": {
-    "@babel/polyfill": "^7.0.0-beta.47",
+    "@babel/polyfill": "^7.0.0-beta.51",
     "history": "4.7.2",
-    "prop-types": "15.6.1",
-    "react": "16.3.2",
-    "react-dom": "16.3.2",
+    "prop-types": "15.6.2",
+    "react": "16.4.1",
+    "react-dom": "16.4.1",
     "react-loadable": "5.4.0",
     "react-redux": "5.0.7",
-    "react-router-dom": "4.2.2",
+    "react-router-dom": "4.3.1",
     "react-router-redux": "^5.0.0-alpha.9",
     "redux": "4.0.0",
-    "redux-persist": "5.9.1",
+    "redux-persist": "5.10.0",
     "redux-saga": "0.16.0",
     "reselect": "3.0.1",
-    "semantic-ui-css": "2.3.1",
-    "semantic-ui-react": "0.79.1"
+    "semantic-ui-css": "2.3.2",
+    "semantic-ui-react": "0.81.1"
   },
   "devDependencies": {
     "node-sass-chokidar": "1.3.0",
     "react-app-rewired": "2.0.0",
-    "react-scripts": "2.0.0-next.66cc7a90",
-    "sass-loader": "7.0.1"
+    "react-scripts": "2.0.0-next.3e165448",
+    "sass-loader": "7.0.3"
   },
   "keywords": [
     "pandoraboxchain",

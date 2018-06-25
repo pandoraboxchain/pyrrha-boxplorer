@@ -9,17 +9,34 @@ import WorkerDetails from '../../containers/WorkerDetails';
 
 import * as selectors from '../../store/selectors';
 import * as actions from '../../store/actions';
+import { convertWorkerStatusCode, convertJobStatusCode } from '../../utils';
 
 import './WorkersTable.scss';
 
 class WorkersTable extends Component {
+
+    convertWorkerStatusCode(code) {
+
+        switch (Number(code)) {
+            case 1: return 'Offline';
+            case 2: return 'Idle';
+            case 3: return 'Assigned';
+            case 4: return 'Ready for data validation';
+            case 5: return 'Validating data';
+            case 6: return 'Ready for computing';
+            case 7: return 'Computing';
+            case 8: return 'Insufficient stake';
+            case 9: return 'Under penalty';
+            default: return 'Unknown';
+        }
+    }
 
     handleRefreshWorkers = (e) => {
         e.preventDefault();
         this.props.refreshWorkers();        
     };
 
-    componentWillMount = () => {
+    UNSAFE_componentWillMount = () => {
         
         if (!this.props.workers || this.props.workers.length === 0) {
 
@@ -39,9 +56,8 @@ class WorkersTable extends Component {
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>Address</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Status</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Reputation</Table.HeaderCell>
-                            <Table.HeaderCell width={2}>Job status</Table.HeaderCell>
+                            <Table.HeaderCell width={1}>Status</Table.HeaderCell>
+                            <Table.HeaderCell width={1}>Job status</Table.HeaderCell>
                         </Table.Row>                            
                     </Table.Header>
                     <Table.Body>
@@ -62,9 +78,8 @@ class WorkersTable extends Component {
                                         }}>{worker.address}</Link>
                                         
                                     </Table.Cell>
-                                    <Table.Cell>{worker.currentState}</Table.Cell>
-                                    <Table.Cell>{worker.reputation}</Table.Cell>
-                                    <Table.Cell>{worker.currentJobStatus}</Table.Cell>
+                                    <Table.Cell>{convertWorkerStatusCode(worker.currentState)}</Table.Cell>
+                                    <Table.Cell>{convertJobStatusCode(worker.currentJobStatus)}</Table.Cell>
                                 </Table.Row> 
                             ))
                         }               

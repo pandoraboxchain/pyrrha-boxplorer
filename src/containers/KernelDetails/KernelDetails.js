@@ -18,7 +18,11 @@ class KernelDetails extends PureComponent {
         visible: false
     };
 
-    componentWillMount() {
+    formatMetaData(data) {
+        return data ? String(data).split(',').join(', ') : '';
+    }
+
+    UNSAFE_componentWillMount() {
 
         if (!this.props.kernel) {
 
@@ -55,10 +59,21 @@ class KernelDetails extends PureComponent {
                                 <Grid columns='equal'>
                                     <Grid.Row>
                                         <Grid.Column width={13} className="pn-details top">
-                                            <span className="label">Kernel</span>: {kernel.address}
+                                            <span className="label">Kernel: </span> 
+                                            <a href={`https://rinkeby.etherscan.io/address/${kernel.address}`}>{kernel.address}</a>
                                         </Grid.Column>
                                         <Grid.Column className="pn-details pn-right">
                                             <span className="label">Dimension:</span> {kernel.dataDim}
+                                        </Grid.Column>
+                                    </Grid.Row>
+                                    <Grid.Row>
+                                        <Grid.Column className="pn-details">
+                                            <span className="label">Description:</span> {kernel.description}                                
+                                        </Grid.Column>
+                                    </Grid.Row>
+                                    <Grid.Row>
+                                        <Grid.Column className="pn-details">
+                                            <span className="label">Meta data:</span> {this.formatMetaData(kernel.metadata)}                                
                                         </Grid.Column>
                                     </Grid.Row>
                                     <Grid.Row>
@@ -73,7 +88,7 @@ class KernelDetails extends PureComponent {
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
-                                            <span className="label">IPFS address of the model:</span> {kernel.ipfsAddress}
+                                            <span className="label">IPFS address of the model:</span> <a href={`https://gateway.ipfs.io/ipfs/${kernel.ipfsAddress}`}>{kernel.ipfsAddress}</a>
                                         </Grid.Column>
                                     </Grid.Row>
                                 </Grid>

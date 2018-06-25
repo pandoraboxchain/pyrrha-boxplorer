@@ -18,7 +18,11 @@ class DatasetDetails extends PureComponent {
         visible: false
     };
 
-    componentWillMount() {
+    formatMetaData(data) {
+        return data ? String(data).split(',').join(', ') : '';
+    }
+
+    UNSAFE_componentWillMount() {
 
         if (!this.props.dataset) {
 
@@ -55,7 +59,8 @@ class DatasetDetails extends PureComponent {
                                 <Grid columns='equal'>
                                     <Grid.Row>
                                         <Grid.Column width={13} className="pn-details top">
-                                            <span className="label">Dataset</span>: {dataset.address}
+                                            <span className="label">Dataset: </span> 
+                                            <a href={`https://rinkeby.etherscan.io/address/${dataset.address}`}>{dataset.address}</a>
                                         </Grid.Column>
                                         <Grid.Column className="pn-details pn-right">
                                             <span className="label">Dimension:</span> {dataset.dataDim}
@@ -63,7 +68,12 @@ class DatasetDetails extends PureComponent {
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
-                                            <span className="label">Samples count:</span> {dataset.samplesCount}                                
+                                            <span className="label">Description:</span> {dataset.description}
+                                        </Grid.Column>
+                                    </Grid.Row>
+                                    <Grid.Row>
+                                        <Grid.Column className="pn-details">
+                                            <span className="label">Meta data:</span> {this.formatMetaData(dataset.metadata)}                                
                                         </Grid.Column>
                                     </Grid.Row>
                                     <Grid.Row>
@@ -78,7 +88,7 @@ class DatasetDetails extends PureComponent {
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
-                                            <span className="label">IPFS address of the model:</span> {dataset.ipfsAddress}
+                                        <span className="label">IPFS address of the dataset:</span> <a href={`https://gateway.ipfs.io/ipfs/${dataset.ipfsAddress}`}>{dataset.ipfsAddress}</a>
                                         </Grid.Column>
                                     </Grid.Row>
                                 </Grid>
