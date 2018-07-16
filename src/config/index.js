@@ -1,8 +1,14 @@
 const hosts = {
     default: {
         protocol: 'http',
-        host: 'api.pandora.network',
-        port: 1111,
+        host: 'boxproxy.pandora.network',
+        port: 80,
+        wsport: 1337
+    },
+    staging: {
+        protocol: 'http',
+        host: 'boxproxy.staging.pandora.network',
+        port: 80,
         wsport: 1337
     },
     local: {
