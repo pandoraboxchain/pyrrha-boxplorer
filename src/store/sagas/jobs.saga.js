@@ -9,12 +9,12 @@ function* startJobsFetch() {
     try {
         const response = yield services.callApi('jobs');
 
-        if (!response.jobs) {
+        if (!response.records) {
 
             return yield put(actions.jobsError(new Error('Wrong response')));
         }
 
-        yield put(actions.jobsReceived(response.jobs));
+        yield put(actions.jobsReceived(response.records));
 
         if (Array.isArray(response.error) && response.error.length > 0) {
 
@@ -36,7 +36,7 @@ function* startSingleJobFetch(req) {
             return yield put(actions.jobsError(new Error('Wrong response')));
         }
 
-        yield put(actions.jobSingleReceived(response));
+        yield put(actions.jobSingleReceived(response.records[0]));
 
         if (Array.isArray(response.error) && response.error.length > 0) {
 

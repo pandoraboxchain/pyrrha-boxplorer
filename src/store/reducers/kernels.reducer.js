@@ -10,13 +10,19 @@ import {
     KERNELS_CLEAN_MESSAGES,
     KERNELS_CLEAN_ERRORS,
     KERNELS_SINGLE_FETCH,
-    KERNELS_SINGLE_RECIEVED
+    KERNELS_SINGLE_RECIEVED,
+    KERNELS_UPDATE_FILTERS,
+    KERNELS_RESET_FILTER
 } from '../actions';
 
 const initialState = {
     isFetching: false,
     isSingleFetching: false,
     kernels: [],
+    count: 0,
+    page: 1,
+    orderBy: {},
+    filterBy: {},
     messages: [],
     errorMessages: []
 };
@@ -24,12 +30,41 @@ const initialState = {
 export const reduce = (state = initialState, action = {}) => {
 
     switch (action.type) {
-        
+
+        case KERNELS_RESET_FILTER:
+            const { [action.key]:removed, ...newFilterBy } = state.filterBy;
+            
+            return {
+                ...state,
+                filterBy: newFilterBy
+            };
+
+        case KERNELS_UPDATE_FILTERS:
+            return {
+                ...state,
+                filterBy: {
+                    ...state.filterBy,
+                    [action.key]: action.value
+                }
+            };
+
         case KERNELS_FETCH:
+
+            let newOrderBy = state.orderBy;
+
+            if (action.orderBy) {
+
+                newOrderBy = {
+                    [action.orderBy]: state.orderBy[action.orderBy] === 'ascending' ? 'descending' : 'ascending'
+                };
+            }
+
             return { 
                 ...state,
                 isFetching: true,
-                errorMessages: []
+                errorMessages: [],
+                page: action.page || state.page,
+                orderBy: newOrderBy
             };
 
         case KERNELS_SINGLE_FETCH:
@@ -43,7 +78,9 @@ export const reduce = (state = initialState, action = {}) => {
             return {
                 ...state,
                 isFetching: false,
-                kernels: action.kernels
+                kernels: action.kernels,
+                count: action.count,
+                page: action.page
             };
 
         case KERNELS_SINGLE_RECIEVED:

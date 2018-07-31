@@ -39,10 +39,10 @@ class JobsTable extends Component {
                 <Table inverted celled selectable unstackable>
                     <Table.Header>
                         <Table.Row>
+                            <Table.HeaderCell width={1}>Id</Table.HeaderCell>
                             <Table.HeaderCell width={4}>Address</Table.HeaderCell>
                             <Table.HeaderCell width={4}>Description</Table.HeaderCell>
                             <Table.HeaderCell width={1}>Status</Table.HeaderCell>
-                            <Table.HeaderCell width={1}>Baches</Table.HeaderCell>
                             <Table.HeaderCell width={1}>Progress</Table.HeaderCell>
                         </Table.Row>                            
                     </Table.Header>
@@ -53,8 +53,9 @@ class JobsTable extends Component {
                             </Table.Row>
                         }
                         {jobs && jobs.length > 0 &&
-                            jobs.map(job => (
+                            jobs.map((job, index) => (
                                 <Table.Row key={job.address}>
+                                    <Table.Cell>{index}</Table.Cell>
                                     <Table.Cell title={job.address}>
                                         <Link to={{
                                             pathname: `${match.url}/${job.address}`,
@@ -65,8 +66,7 @@ class JobsTable extends Component {
                                         
                                     </Table.Cell>
                                     <Table.Cell>{job.description}</Table.Cell>
-                                    <Table.Cell>{convertJobStatusCode(job.jobStatus)}</Table.Cell>
-                                    <Table.Cell>{job.batches}</Table.Cell>
+                                    <Table.Cell>{convertJobStatusCode(job.state)}</Table.Cell>
                                     <Table.Cell>{job.progress}</Table.Cell>
                                 </Table.Row> 
                             ))

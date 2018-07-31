@@ -55,7 +55,8 @@ class WorkersTable extends Component {
                 <Table inverted celled selectable unstackable>
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell>Address</Table.HeaderCell>
+                            <Table.HeaderCell width={1}>Id</Table.HeaderCell>
+                            <Table.HeaderCell width={4}>Address</Table.HeaderCell>
                             <Table.HeaderCell width={1}>Status</Table.HeaderCell>
                             <Table.HeaderCell width={1}>Job status</Table.HeaderCell>
                         </Table.Row>                            
@@ -63,12 +64,13 @@ class WorkersTable extends Component {
                     <Table.Body>
                         {(!workers || workers.length === 0) &&
                             <Table.Row>
-                                <Table.Cell colSpan="5">Nothing to display</Table.Cell>
+                                <Table.Cell colSpan="4">Nothing to display</Table.Cell>
                             </Table.Row>
                         }
                         {workers && workers.length > 0 &&
-                            workers.map(worker => (
+                            workers.map((worker, index) => (
                                 <Table.Row key={worker.address}>
+                                    <Table.Cell>{index}</Table.Cell>
                                     <Table.Cell title={worker.address}>
                                         <Link to={{
                                             pathname: `${match.url}/${worker.address}`,
@@ -86,7 +88,7 @@ class WorkersTable extends Component {
                     </Table.Body>
                     <Table.Footer>
                         <Table.Row>
-                            <Table.Cell colSpan="5">
+                            <Table.Cell colSpan="4">
                                 <Button 
                                     loading={isFetching}
                                     onClick={this.handleRefreshWorkers}>Refresh</Button>

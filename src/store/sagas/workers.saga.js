@@ -9,12 +9,12 @@ function* startWorkersFetch() {
     try {
         const response = yield services.callApi('workers');
 
-        if (!response.workers) {
+        if (!response.records) {
 
             return yield put(actions.workersError(new Error('Wrong response')));
         }
 
-        yield put(actions.workersReceived(response.workers));
+        yield put(actions.workersReceived(response.records));
 
         if (Array.isArray(response.error) && response.error.length > 0) {
 
@@ -36,7 +36,7 @@ function* startSingleWorkerFetch(req) {
             return yield put(actions.workersError(new Error('Wrong response')));
         }
 
-        yield put(actions.workerSingleReceived(response));
+        yield put(actions.workerSingleReceived(response.records[0]));
 
         if (Array.isArray(response.error) && response.error.length > 0) {
 

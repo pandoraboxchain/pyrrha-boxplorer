@@ -38,6 +38,7 @@ class DatasetsTable extends Component {
                 <Table inverted celled selectable unstackable>
                     <Table.Header>
                         <Table.Row>
+                            <Table.HeaderCell width={1}>Id</Table.HeaderCell>
                             <Table.HeaderCell width={4}>Address</Table.HeaderCell>
                             <Table.HeaderCell width={4}>Description</Table.HeaderCell>
                             <Table.HeaderCell width={1}>Dim</Table.HeaderCell>
@@ -52,8 +53,9 @@ class DatasetsTable extends Component {
                             </Table.Row>
                         }
                         {datasets && datasets.length > 0 &&
-                            datasets.map(dataset => (
+                            datasets.map((dataset, index) => (
                                 <Table.Row key={dataset.address}>
+                                    <Table.Cell>{index}</Table.Cell>
                                     <Table.Cell title={dataset.address}>
                                         <Link to={{
                                             pathname: `${match.url}/${dataset.address}`,

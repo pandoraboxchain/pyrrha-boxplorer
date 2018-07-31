@@ -9,12 +9,12 @@ function* startDatasetsFetch() {
     try {
         const response = yield services.callApi('datasets');
 
-        if (!response.datasets) {
+        if (!response.records) {
 
             return yield put(actions.datasetsError(new Error('Wrong response')));
         }
 
-        yield put(actions.datasetsReceived(response.datasets));
+        yield put(actions.datasetsReceived(response.records));
 
         if (Array.isArray(response.error) && response.error.length > 0) {
 
@@ -36,7 +36,7 @@ function* startSingleDatasetFetch(req) {
             return yield put(actions.datasetsError(new Error('Wrong response')));
         }
 
-        yield put(actions.datasetSingleReceived(response));
+        yield put(actions.datasetSingleReceived(response.records[0]));
 
         if (Array.isArray(response.error) && response.error.length > 0) {
 

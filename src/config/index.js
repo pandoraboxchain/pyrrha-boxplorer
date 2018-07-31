@@ -33,5 +33,8 @@ export default {
     protocol: process.env.REACT_APP_BOXPROXY_PROTOCOL || config.protocol,
     host: process.env.REACT_APP_BOXPROXY_HOST || config.host,
     port: process.env.REACT_APP_BOXPROXY_PORT || config.port,
-    wsport: process.env.REACT_APP_BOXPROXY_WS_PORT || config.wsport
+    wsport: process.env.REACT_APP_BOXPROXY_WS_PORT || config.wsport,
+    pagination: {
+        limit: 5
+    }
 };
