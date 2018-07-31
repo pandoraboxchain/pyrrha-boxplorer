@@ -2,23 +2,24 @@ import config from '../config';
 
 export const callApi = async (url, options = {}) => {
     const query = [];
+    const orderKeys = Object.keys(options.orderBy);
+    const filterKeys = Object.keys(options.filterBy);
     let orderRules = '';
     let filterRules = '';
+
     query.push(`page=${options.page || 1}`);
 
-    if (options.orderBy && Object.keys(options.orderBy).length > 0) {
+    if (options.orderBy && orderKeys.length > 0) {
 
-        orderRules = Object.keys(options.orderBy)
+        orderRules = orderKeys
             .map(key => `${key}:${options.orderBy[key] === 'ascending' ? 'ASC' : 'DESC'}`)
             .join(';');
         query.push(`orderBy=${orderRules}`);
     }
 
-    console.log('>>>', options.filterBy)
+    if (options.filterBy && filterKeys.length > 0) {
 
-    if (options.filterBy && Object.keys(options.filterBy).length > 0) {
-
-        filterRules = Object.keys(options.filterBy)
+        filterRules = filterKeys
             .map(key => `${key}:like:${options.filterBy[key]}`)
             .join(';');
         query.push(`filterBy=${filterRules}`);

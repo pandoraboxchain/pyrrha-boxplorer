@@ -92,7 +92,10 @@ class KernelsTable extends Component {
                                 sorted={orderBy['dataDim']} 
                                 onClick={this.handleOrderBy('dataDim')}
                                 >Dim</Table.HeaderCell>
-                            <Table.HeaderCell width={1}>Compl</Table.HeaderCell>
+                            <Table.HeaderCell width={1}
+                                sorted={orderBy['complexity']} 
+                                onClick={this.handleOrderBy('complexity')}
+                                >Compl</Table.HeaderCell>
                             <Table.HeaderCell width={1} 
                                 sorted={orderBy['currentPrice']} 
                                 onClick={this.handleOrderBy('currentPrice')}
