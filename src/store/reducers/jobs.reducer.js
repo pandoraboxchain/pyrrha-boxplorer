@@ -10,13 +10,19 @@ import {
     JOBS_CLEAN_MESSAGES,
     JOBS_CLEAN_ERRORS,
     JOBS_SINGLE_FETCH,
-    JOBS_SINGLE_RECIEVED
+    JOBS_SINGLE_RECIEVED,
+    JOBS_UPDATE_FILTERS,
+    JOBS_RESET_FILTER
 } from '../actions';
 
 const initialState = {
     isFetching: false,
     isSingleFetching: false,
     jobs: [],
+    count: 0,
+    page: 1,
+    orderBy: {},
+    filterBy: {},
     messages: [],
     errorMessages: []
 };
@@ -24,12 +30,40 @@ const initialState = {
 export const reduce = (state = initialState, action = {}) => {
 
     switch (action.type) {
+
+        case JOBS_RESET_FILTER:
+            const { [action.key]:removed, ...newFilterBy } = state.filterBy;
+            
+            return {
+                ...state,
+                filterBy: newFilterBy
+            };
+
+        case JOBS_UPDATE_FILTERS:
+            return {
+                ...state,
+                filterBy: {
+                    ...state.filterBy,
+                    [action.key]: action.value
+                }
+            };
         
         case JOBS_FETCH:
+            let newOrderBy = state.orderBy;
+
+            if (action.orderBy) {
+
+                newOrderBy = {
+                    [action.orderBy]: state.orderBy[action.orderBy] === 'ascending' ? 'descending' : 'ascending'
+                };
+            }
+
             return { 
                 ...state,
                 isFetching: true,
-                errorMessages: []
+                errorMessages: [],
+                page: action.page || state.page,
+                orderBy: newOrderBy
             };
 
         case JOBS_SINGLE_FETCH:
@@ -43,7 +77,9 @@ export const reduce = (state = initialState, action = {}) => {
             return {
                 ...state,
                 isFetching: false,
-                jobs: action.jobs
+                jobs: action.jobs,
+                count: action.count,
+                page: action.page
             };
 
         case JOBS_SINGLE_RECIEVED:

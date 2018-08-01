@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Table, Button } from 'semantic-ui-react';
+import { Table, Button, Pagination, Input, Icon } from 'semantic-ui-react';
 import { Route, Link, withRouter } from 'react-router-dom';
 import ErrorsBlock from '../../components/ErrorsBlock';
 import WorkerDetails from '../../containers/WorkerDetails';
@@ -15,50 +15,77 @@ import './WorkersTable.scss';
 
 class WorkersTable extends Component {
 
-    convertWorkerStatusCode(code) {
-
-        switch (Number(code)) {
-            case 1: return 'Offline';
-            case 2: return 'Idle';
-            case 3: return 'Assigned';
-            case 4: return 'Ready for data validation';
-            case 5: return 'Validating data';
-            case 6: return 'Ready for computing';
-            case 7: return 'Computing';
-            case 8: return 'Insufficient stake';
-            case 9: return 'Under penalty';
-            default: return 'Unknown';
-        }
-    }
-
     handleRefreshWorkers = (e) => {
         e.preventDefault();
-        this.props.refreshWorkers();        
+        this.props.refresh();        
     };
 
     UNSAFE_componentWillMount = () => {
         
         if (!this.props.workers || this.props.workers.length === 0) {
 
-            this.props.refreshWorkers();        
+            this.props.refresh();        
         }        
     };
 
+    handlePaginationChange = (e, { activePage }) => {
+        e.preventDefault();
+        this.props.refresh(activePage); 
+    }
+
+    handleOrderBy = column => () => this.props.refreshOrderBy(column);
+
+    handleOnChange = column => (e, { value }) => {
+        e.preventDefault();
+        this.props.updateFilters(column, value);
+    }
+
+    handleFilterBy = column => e => {
+
+        if (e.charCode === 13 && this.props.filterBy[column]) {
+
+            this.props.doSearch();
+        }        
+    }
+
+    handleSearchClick = column => e => {
+        this.props.resetFilter(column);
+    }
+
     render() {
-        const { isFetching, workers, errors, match } = this.props;
+        const { isFetching, workers, page, totalPages, orderBy, filterBy, errors, match } = this.props;
 
         return (
             <div>
                 <div>
                     <Route path={`${match.path}/:address`} component={WorkerDetails}/>                    
                 </div>                
-                <Table inverted celled selectable unstackable>
+                <Table inverted celled sortable selectable unstackable>
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell width={1}>Id</Table.HeaderCell>
-                            <Table.HeaderCell width={4}>Address</Table.HeaderCell>
-                            <Table.HeaderCell width={1}>Status</Table.HeaderCell>
-                            <Table.HeaderCell width={1}>Job status</Table.HeaderCell>
+                            <Table.HeaderCell width={1} 
+                                sorted={orderBy['id']} 
+                                onClick={this.handleOrderBy('id')}
+                                >Id</Table.HeaderCell>
+                            <Table.HeaderCell width={4} >
+                                <Input className="fiter-by" fluid transparent placeholder='Address' 
+                                    value={filterBy['address'] || ''}
+                                    onChange={this.handleOnChange('address')} 
+                                    onKeyPress={this.handleFilterBy('address')}>
+                                    <input />
+                                    <Icon inverted 
+                                        name={filterBy['address'] ? 'remove' : 'search'} 
+                                        onClick={this.handleSearchClick('address')} />
+                                </Input> 
+                            </Table.HeaderCell>
+                            <Table.HeaderCell width={1} 
+                                sorted={orderBy['currentState']} 
+                                onClick={this.handleOrderBy('currentState')}
+                                >Status</Table.HeaderCell>
+                            <Table.HeaderCell width={1} 
+                                sorted={orderBy['currentJobStatus']} 
+                                onClick={this.handleOrderBy('currentJobStatus')}
+                                >Job status</Table.HeaderCell>
                         </Table.Row>                            
                     </Table.Header>
                     <Table.Body>
@@ -68,9 +95,9 @@ class WorkersTable extends Component {
                             </Table.Row>
                         }
                         {workers && workers.length > 0 &&
-                            workers.map((worker, index) => (
+                            workers.map(worker => (
                                 <Table.Row key={worker.address}>
-                                    <Table.Cell>{index}</Table.Cell>
+                                    <Table.Cell>{worker.id}</Table.Cell>
                                     <Table.Cell title={worker.address}>
                                         <Link to={{
                                             pathname: `${match.url}/${worker.address}`,
@@ -87,6 +114,15 @@ class WorkersTable extends Component {
                         }               
                     </Table.Body>
                     <Table.Footer>
+                        <Table.Row>
+                            <Table.Cell colSpan="4">
+                                <Pagination 
+                                    inverted 
+                                    activePage={page}
+                                    onPageChange={this.handlePaginationChange}
+                                    totalPages={totalPages} />
+                            </Table.Cell>
+                        </Table.Row>
                         <Table.Row>
                             <Table.Cell colSpan="4">
                                 <Button 
@@ -113,6 +149,10 @@ WorkersTable.propTypes = {
 WorkersTable.defaultProps = {
     isFetching: false,
     workers: [],
+    page: 1,
+    totalPages: 0,
+    orderBy: {},
+    filterBy: {},
     errors: []
 };
 
@@ -121,6 +161,10 @@ const mapStateToProps = state => {
     return {
         isFetching: selectors.isWorkersFetching(state),
         workers: selectors.getWorkers(state),
+        page: selectors.getWorkersPage(state),
+        totalPages: selectors.getWorkersTotalPages(state),
+        orderBy: selectors.getWorkersOrderBy(state),
+        filterBy: selectors.getWorkersFilterBy(state),
         errors: selectors.workersErrors(state)
     }
 };
@@ -128,7 +172,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 
     return {
-        refreshWorkers: () => dispatch(actions.workersFetch()),
+        refresh: activePage => dispatch(actions.workersFetch(activePage)),
+        refreshOrderBy: column => dispatch(actions.workersOrderByToggle(column)),
+        updateFilters: (column, value) => dispatch(actions.workerUpdateFilter(column, value)),
+        doSearch: () => dispatch(actions.doWorkersSearch()),
+        resetFilter: column => dispatch(actions.resetWorkersFilter(column)),
         dismissError: index => dispatch(actions.removeWorkersError(index))
     }
 };

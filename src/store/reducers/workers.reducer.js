@@ -10,13 +10,19 @@ import {
     WORKERS_CLEAN_MESSAGES,
     WORKERS_CLEAN_ERRORS,
     WORKERS_SINGLE_FETCH,
-    WORKERS_SINGLE_RECIEVED
+    WORKERS_SINGLE_RECIEVED,
+    WORKERS_UPDATE_FILTERS,
+    WORKERS_RESET_FILTER
 } from '../actions';
 
 const initialState = {
     isFetching: false,
     isSingleFetching: false,
     workers: [],
+    count: 0,
+    page: 1,
+    orderBy: {},
+    filterBy: {},
     messages: [],
     errorMessages: []
 };
@@ -24,12 +30,40 @@ const initialState = {
 export const reduce = (state = initialState, action = {}) => {
 
     switch (action.type) {
+
+        case WORKERS_RESET_FILTER:
+            const { [action.key]:removed, ...newFilterBy } = state.filterBy;
+            
+            return {
+                ...state,
+                filterBy: newFilterBy
+            };
+
+        case WORKERS_UPDATE_FILTERS:
+            return {
+                ...state,
+                filterBy: {
+                    ...state.filterBy,
+                    [action.key]: action.value
+                }
+            };
         
         case WORKERS_FETCH:
+            let newOrderBy = state.orderBy;
+
+            if (action.orderBy) {
+
+                newOrderBy = {
+                    [action.orderBy]: state.orderBy[action.orderBy] === 'ascending' ? 'descending' : 'ascending'
+                };
+            }
+
             return { 
                 ...state,
                 isFetching: true,
-                errorMessages: []
+                errorMessages: [],
+                page: action.page || state.page,
+                orderBy: newOrderBy
             };
 
         case WORKERS_SINGLE_FETCH:
@@ -43,7 +77,9 @@ export const reduce = (state = initialState, action = {}) => {
             return {
                 ...state,
                 isFetching: false,
-                workers: action.workers
+                workers: action.workers,
+                count: action.count,
+                page: action.page
             };
 
         case WORKERS_SINGLE_RECIEVED:

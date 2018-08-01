@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import config from '../../config'
+import config from '../../config';
 
 export const isKernelsFetching = state => !!state.kernels.isFetching;
 export const isKernelSinglesFetching = state => !!state.kernels.isSingleFetching;

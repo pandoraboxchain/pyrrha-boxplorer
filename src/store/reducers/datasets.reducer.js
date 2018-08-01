@@ -10,13 +10,19 @@ import {
     DATASETS_CLEAN_MESSAGES,
     DATASETS_CLEAN_ERRORS,
     DATASETS_SINGLE_FETCH,
-    DATASETS_SINGLE_RECIEVED
+    DATASETS_SINGLE_RECIEVED,
+    DATASETS_UPDATE_FILTERS,
+    DATASETS_RESET_FILTER
 } from '../actions';
 
 const initialState = {
     isFetching: false,
     isSingleFetching: false,
     datasets: [],
+    count: 0,
+    page: 1,
+    orderBy: {},
+    filterBy: {},
     messages: [],
     errorMessages: []
 };
@@ -24,12 +30,40 @@ const initialState = {
 export const reduce = (state = initialState, action = {}) => {
 
     switch (action.type) {
+
+        case DATASETS_RESET_FILTER:
+            const { [action.key]:removed, ...newFilterBy } = state.filterBy;
+            
+            return {
+                ...state,
+                filterBy: newFilterBy
+            };
+
+        case DATASETS_UPDATE_FILTERS:
+            return {
+                ...state,
+                filterBy: {
+                    ...state.filterBy,
+                    [action.key]: action.value
+                }
+            };
         
         case DATASETS_FETCH:
+            let newOrderBy = state.orderBy;
+
+            if (action.orderBy) {
+
+                newOrderBy = {
+                    [action.orderBy]: state.orderBy[action.orderBy] === 'ascending' ? 'descending' : 'ascending'
+                };
+            }
+
             return { 
                 ...state,
                 isFetching: true,
-                errorMessages: []
+                errorMessages: [],
+                page: action.page || state.page,
+                orderBy: newOrderBy
             };
 
         case DATASETS_SINGLE_FETCH:
@@ -43,7 +77,9 @@ export const reduce = (state = initialState, action = {}) => {
             return {
                 ...state,
                 isFetching: false,
-                datasets: action.datasets
+                datasets: action.datasets,
+                count: action.count,
+                page: action.page
             };
 
         case DATASETS_SINGLE_RECIEVED:

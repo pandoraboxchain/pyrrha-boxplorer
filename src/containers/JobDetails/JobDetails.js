@@ -60,7 +60,7 @@ class JobDetails extends PureComponent {
                                             <a href={`https://rinkeby.etherscan.io/address/${job.address}`}>{job.address}</a>
                                         </Grid.Column>
                                         <Grid.Column width={4} className="pn-details pn-right">
-                                            <nobr><span className="label">Status:</span> {convertJobStatusCode(job.jobStatus)}</nobr>
+                                            <nobr><span className="label">Status:</span> {convertJobStatusCode(job.state)}</nobr>
                                         </Grid.Column>
                                     </Grid.Row>
                                     <Grid.Row>
@@ -77,7 +77,7 @@ class JobDetails extends PureComponent {
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
-                                            <span className="label">Batches count: </span> {job.batches}                                
+                                            <span className="label">Batches count: </span> {job.activeWorkers.split(';').length}                                
                                         </Grid.Column>
                                     </Grid.Row>
                                     <Grid.Row>
@@ -87,15 +87,22 @@ class JobDetails extends PureComponent {
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
-                                            <span className="label">Active workers count: </span> {job.activeWorkersCount}
+                                            <span className="label">Active workers: </span> 
+                                            <ul>
+                                            {job.activeWorkers &&                                                
+                                                (job.activeWorkers.split(';').map((worker, index) => (
+                                                    <li key={index}><a href={`/workers/${worker}`}>{worker}</a></li>
+                                                )))
+                                            }
+                                            </ul>
                                         </Grid.Column>
                                     </Grid.Row>
                                     <Grid.Row>
                                         <Grid.Column className="pn-details">
                                             <span className="label">IPFS results: </span> 
                                             <ul>
-                                            {job.ipfsResults && Array.isArray(job.ipfsResults) &&
-                                                (job.ipfsResults.map((result, index) => (
+                                            {job.ipfsResults && 
+                                                (job.ipfsResults.split(';').map((result, index) => (
                                                     <li key={index}><a href={`https://gateway.ipfs.io/ipfs/${result}`}>{result}</a></li>
                                                 )))
                                             }

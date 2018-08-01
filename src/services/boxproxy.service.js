@@ -2,8 +2,8 @@ import config from '../config';
 
 export const callApi = async (url, options = {}) => {
     const query = [];
-    const orderKeys = Object.keys(options.orderBy);
-    const filterKeys = Object.keys(options.filterBy);
+    const orderKeys = options.orderBy ? Object.keys(options.orderBy) : [];
+    const filterKeys = options.filterBy ? Object.keys(options.filterBy): [];
     let orderRules = '';
     let filterRules = '';
 
@@ -24,7 +24,7 @@ export const callApi = async (url, options = {}) => {
             .join(';');
         query.push(`filterBy=${filterRules}`);
     }
-    
+
     return await fetch(`${config.protocol}://${config.host}:${config.port}/${url}?${query.length > 0 ? query.join('&') : ''}`)
         .then(res => res.json());
 };

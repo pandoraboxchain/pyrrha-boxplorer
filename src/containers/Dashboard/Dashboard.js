@@ -1,14 +1,23 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import * as selectors from '../../store/selectors';
+import * as actions from '../../store/actions';
 
 import AddressTable from '../../components/AddressTable';
 import { Grid } from 'semantic-ui-react';
 
-class Dashboard extends PureComponent {   
+class Dashboard extends Component { 
+    
+    UNSAFE_componentWillMount = () => {
+        
+        this.props.rewind('kernels');        
+        this.props.rewind('datasets');
+        this.props.rewind('workers');
+        this.props.rewind('jobs');
+    };
 
     render() {
 
@@ -35,7 +44,10 @@ class Dashboard extends PureComponent {
                             header='Kernels' 
                             detailsPath='kernels' 
                             isFetching={isKernelsFetching} 
-                            records={kernels}
+                            records={kernels} 
+                            refreshAction='kernelsFetch' 
+                            pageSelector='getKernelsPage'
+                            totalPagesSelector='getKernelsTotalPages'
                             errors={kernelsErrors} />
                     </Grid.Column>
                     <Grid.Column>
@@ -43,7 +55,13 @@ class Dashboard extends PureComponent {
                             header='Datasets' 
                             detailsPath='datasets' 
                             isFetching={isDatasetsFetching} 
-                            records={datasets}
+                            records={datasets} 
+                            refreshAction='datasetsFetch' 
+                            pageSelector='getDatasetsPage'
+                            totalPagesSelector='getDatasetsTotalPages' 
+                            extraColumnName='batchesCount' 
+                            extraColumnTitle='Batches'
+                            extraColumnFormat={null}
                             errors={datasetsErrors} />
                     </Grid.Column>
                     <Grid.Column>
@@ -51,7 +69,13 @@ class Dashboard extends PureComponent {
                             header='Workers' 
                             detailsPath='workers' 
                             isFetching={isWorkersFetching} 
-                            records={workers}
+                            records={workers} 
+                            refreshAction='workersFetch' 
+                            pageSelector='getWorkersPage'
+                            totalPagesSelector='getWorkersTotalPages' 
+                            extraColumnName='currentState' 
+                            extraColumnTitle='State'
+                            extraColumnFormat='convertWorkerStatusCode' 
                             errors={workersErrors} />
                     </Grid.Column>
                     <Grid.Column>
@@ -59,7 +83,13 @@ class Dashboard extends PureComponent {
                             header='Jobs' 
                             detailsPath='jobs' 
                             isFetching={isJobsFetching} 
-                            records={jobs}
+                            records={jobs} 
+                            refreshAction='jobsFetch' 
+                            pageSelector='getJobsPage'
+                            totalPagesSelector='getJobsTotalPages' 
+                            extraColumnName='state' 
+                            extraColumnTitle='State'
+                            extraColumnFormat='convertJobStatusCode'
                             errors={jobsErrors} />
                     </Grid.Column>                    
                 </Grid>                
@@ -119,4 +149,18 @@ const mapStateToProps = (state, props) => {
     }
 };
 
-export default withRouter(connect(mapStateToProps)(Dashboard));
+const mapDispatchToProps = dispatch => {
+
+    const fetchers = {
+        kernels: 'kernelsFetch',
+        datasets: 'datasetsFetch',
+        workers: 'workersFetch',
+        jobs: 'jobsFetch'
+    };
+
+    return {
+        rewind: target => dispatch(actions[fetchers[target]](1))
+    }
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard));

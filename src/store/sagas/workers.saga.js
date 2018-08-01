@@ -7,14 +7,17 @@ import * as selectors from '../selectors';
 function* startWorkersFetch() {
     
     try {
-        const response = yield services.callApi('workers');
+        const page = yield select(selectors.getWorkersPage);
+        const orderBy = yield select(selectors.getWorkersOrderBy);
+        const filterBy = yield select(selectors.getWorkersFilterBy);
+        const response = yield services.callApi('workers', { page, orderBy, filterBy });
 
         if (!response.records) {
 
             return yield put(actions.workersError(new Error('Wrong response')));
         }
 
-        yield put(actions.workersReceived(response.records));
+        yield put(actions.workersReceived(response.records, response.count, response.page));
 
         if (Array.isArray(response.error) && response.error.length > 0) {
 
@@ -60,6 +63,7 @@ function* initWorkers() {
 function* watchRouter() {
     yield takeLatest('persist/REHYDRATE', initWorkers);// Start if REHYDRATE process done only
     yield takeLatest('WORKERS_FETCH', startWorkersFetch);
+    yield takeLatest('WORKERS_RESET_FILTER', startWorkersFetch);
     yield takeLatest('WORKERS_SINGLE_FETCH', startSingleWorkerFetch);
 }
 

@@ -16,39 +16,39 @@ class KernelsTable extends Component {
 
     handleRefreshKernels = (e) => {
         e.preventDefault();
-        this.props.refreshKernels();        
+        this.props.refresh();        
     };
 
     UNSAFE_componentWillMount = () => {
         
         if (!this.props.kernels || this.props.kernels.length === 0) {
 
-            this.props.refreshKernels();        
+            this.props.refresh();        
         }        
     };
 
     handlePaginationChange = (e, { activePage }) => {
         e.preventDefault();
-        this.props.refreshKernels(activePage); 
+        this.props.refresh(activePage); 
     }
 
     handleOrderBy = column => () => this.props.refreshOrderBy(column);
 
     handleOnChange = column => (e, { value }) => {
         e.preventDefault();
-        this.props.updateKernelsFilters(column, value);
+        this.props.updateFilters(column, value);
     }
 
     handleFilterBy = column => e => {
 
         if (e.charCode === 13 && this.props.filterBy[column]) {
 
-            this.props.doKernelsSearch();
+            this.props.doSearch();
         }        
     }
 
     handleSearchClick = column => e => {
-        this.props.resetKernelsFilter(column);
+        this.props.resetFilter(column);
     }
 
     render() {
@@ -188,11 +188,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 
     return {
-        refreshKernels: activePage => dispatch(actions.kernelsFetch(activePage)),
+        refresh: activePage => dispatch(actions.kernelsFetch(activePage)),
         refreshOrderBy: column => dispatch(actions.kernelsOrderByToggle(column)),
-        updateKernelsFilters: (column, value) => dispatch(actions.kernelUpdateFilter(column, value)),
-        doKernelsSearch: () => dispatch(actions.doKernelsSearch()),
-        resetKernelsFilter: column => dispatch(actions.resetKernelsFilter(column)),
+        updateFilters: (column, value) => dispatch(actions.kernelUpdateFilter(column, value)),
+        doSearch: () => dispatch(actions.doKernelsSearch()),
+        resetFilter: column => dispatch(actions.resetKernelsFilter(column)),
         dismissError: index => dispatch(actions.removeKernelsError(index))
     }
 };
