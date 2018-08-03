@@ -54,6 +54,7 @@ class AddressTable extends PureComponent {
                     <Table.Body>
                         {(!records || records.length === 0) &&
                             <Table.Row>
+                                <Table.Cell>&nbsp;</Table.Cell>
                                 <Table.Cell colSpan={extraColumnTitle ? 2 : 1}>Nothing to display</Table.Cell>
                             </Table.Row>
                         }
@@ -76,7 +77,7 @@ class AddressTable extends PureComponent {
                             )))                                
                         }
                         {(records && records.length < config.pagination.limit) && 
-                            ([...Array(config.pagination.limit - records.length).keys()].map(key => (
+                            ([...Array(records.length === 0 ? config.pagination.limit -1 : config.pagination.limit - records.length).keys()].map(key => (
                                 <Table.Row key={key}>
                                     <Table.Cell>&nbsp;</Table.Cell>
                                     <Table.Cell>&nbsp;</Table.Cell>
