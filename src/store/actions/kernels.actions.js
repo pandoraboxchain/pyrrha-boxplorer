@@ -12,7 +12,9 @@ export const KERNELS_SINGLE_FETCH = 'KERNELS_SINGLE_FETCH';
 export const KERNELS_SINGLE_RECIEVED = 'KERNELS_SINGLE_RECIEVED';
 export const KERNELS_UPDATE_FILTERS = 'KERNELS_UPDATE_FILTERS';
 export const KERNELS_RESET_FILTER = 'KERNELS_RESET_FILTER';
+export const KERNELS_REFRESH = 'KERNELS_REFRESH';
 
+export const kernelsRefresh = () => action(KERNELS_REFRESH);
 export const kernelsFetch = (page = 1) => action(KERNELS_FETCH, { page });
 export const kernelsReceived = (kernels, count, page) => action(KERNELS_RECEIVED, { kernels, count, page });
 export const kernelsError = error => action(KERNELS_ERROR, { error });

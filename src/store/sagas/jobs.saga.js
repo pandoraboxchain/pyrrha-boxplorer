@@ -64,6 +64,7 @@ function* watchRouter() {
     yield takeLatest('persist/REHYDRATE', initJobs);// Start if REHYDRATE process done only
     yield takeLatest('JOBS_FETCH', startJobsFetch);
     yield takeLatest('JOBS_RESET_FILTER', startJobsFetch);
+    yield takeLatest('JOBS_REFRESH', startJobsFetch);
     yield takeLatest('JOBS_SINGLE_FETCH', startSingleJobFetch);
 }
 

@@ -12,7 +12,9 @@ export const DATASETS_SINGLE_FETCH = 'DATASETS_SINGLE_FETCH';
 export const DATASETS_SINGLE_RECIEVED = 'DATASETS_SINGLE_RECIEVED';
 export const DATASETS_UPDATE_FILTERS = 'DATASETS_UPDATE_FILTERS';
 export const DATASETS_RESET_FILTER = 'DATASETS_RESET_FILTER';
+export const DATASETS_REFRESH = 'DATASETS_REFRESH';
 
+export const datasetsRefresh = () => action(DATASETS_REFRESH);
 export const datasetsFetch = (page = 1) => action(DATASETS_FETCH, { page });
 export const datasetsReceived = (datasets, count, page) => action(DATASETS_RECEIVED, { datasets, count, page });
 export const datasetsError = error => action(DATASETS_ERROR, { error });

@@ -64,6 +64,7 @@ function* watchRouter() {
     yield takeLatest('persist/REHYDRATE', initDatasets);// Start if REHYDRATE process done only
     yield takeLatest('DATASETS_FETCH', startDatasetsFetch);
     yield takeLatest('DATASETS_RESET_FILTER', startDatasetsFetch);
+    yield takeLatest('DATASETS_REFRESH', startDatasetsFetch);
     yield takeLatest('DATASETS_SINGLE_FETCH', startSingleDatasetFetch);
 }
 

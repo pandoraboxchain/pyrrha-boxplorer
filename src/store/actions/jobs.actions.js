@@ -12,7 +12,9 @@ export const JOBS_SINGLE_FETCH = 'JOBS_SINGLE_FETCH';
 export const JOBS_SINGLE_RECIEVED = 'JOBS_SINGLE_RECIEVED';
 export const JOBS_UPDATE_FILTERS = 'JOBS_UPDATE_FILTERS';
 export const JOBS_RESET_FILTER = 'JOBS_RESET_FILTER';
+export const JOBS_REFRESH = 'JOBS_REFRESH';
 
+export const jobsRefresh = () => action(JOBS_REFRESH);
 export const jobsFetch = (page = 1) => action(JOBS_FETCH, { page });
 export const jobsReceived = (jobs, count, page) => action(JOBS_RECEIVED, { jobs, count, page  });
 export const jobsError = error => action(JOBS_ERROR, { error });

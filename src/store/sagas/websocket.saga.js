@@ -9,30 +9,24 @@ import * as actions from '../actions';
 let reconnectionCounter = 0;
 
 const processEvent = data => {
-
+    
     switch (data.event) {
-        case 'PandoraMarket.DatasetAdded':
-            store.dispatch(actions.datasetSingleReceived(data.dataset));
+        case 'datasetsRecords':
+        case 'datasetsRecordsRemove':
+            store.dispatch(actions.datasetsRefresh());
             break;
 
-        case 'PandoraMarket.KernelAdded':
-            store.dispatch(actions.kernelSingleReceived(data.kernel));
+        case 'kernelsRecords':
+        case 'kernelsRecordsRemove':
+            store.dispatch(actions.kernelsRefresh());
             break;
 
-        case 'Pandora.WorkerNodeCreated':
-            store.dispatch(actions.workerSingleReceived(data.worker));
+        case 'workersRecords':
+            store.dispatch(actions.workersRefresh());
             break;
 
-        case 'WorkerNode.StateChanged':
-            store.dispatch(actions.workerSingleReceived(data.worker));
-            break;
-
-        case 'Pandora.CognitiveJobCreated':
-            store.dispatch(actions.jobSingleReceived(data.job));
-            break;
-
-        case 'CognitiveJob.StateChanged':
-            store.dispatch(actions.jobSingleReceived(data.job));
+        case 'jobsRecords':
+            store.dispatch(actions.jobsRefresh());
             break;
 
         default:

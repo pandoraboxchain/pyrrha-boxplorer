@@ -64,6 +64,7 @@ function* watchRouter() {
     yield takeLatest('persist/REHYDRATE', initKernels);// Start if REHYDRATE process done only
     yield takeLatest('KERNELS_FETCH', startKernelsFetch);
     yield takeLatest('KERNELS_RESET_FILTER', startKernelsFetch);
+    yield takeLatest('KERNELS_REFRESH', startKernelsFetch);
     yield takeLatest('KERNELS_SINGLE_FETCH', startSingleKernelFetch);
 }
 

@@ -64,6 +64,7 @@ function* watchRouter() {
     yield takeLatest('persist/REHYDRATE', initWorkers);// Start if REHYDRATE process done only
     yield takeLatest('WORKERS_FETCH', startWorkersFetch);
     yield takeLatest('WORKERS_RESET_FILTER', startWorkersFetch);
+    yield takeLatest('WORKERS_REFRESH', startWorkersFetch);
     yield takeLatest('WORKERS_SINGLE_FETCH', startSingleWorkerFetch);
 }
 

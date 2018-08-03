@@ -12,7 +12,9 @@ export const WORKERS_SINGLE_FETCH = 'WORKERS_SINGLE_FETCH';
 export const WORKERS_SINGLE_RECIEVED = 'WORKERS_SINGLE_RECIEVED';
 export const WORKERS_UPDATE_FILTERS = 'WORKERS_UPDATE_FILTERS';
 export const WORKERS_RESET_FILTER = 'WORKERS_RESET_FILTER';
+export const WORKERS_REFRESH = 'WORKERS_REFRESH';
 
+export const workersRefresh = () => action(WORKERS_REFRESH);
 export const workersFetch = (page = 1) => action(WORKERS_FETCH, { page });
 export const workersReceived = (workers, count, page) => action(WORKERS_RECEIVED, { workers, count, page  });
 export const workersError = error => action(WORKERS_ERROR, { error });
