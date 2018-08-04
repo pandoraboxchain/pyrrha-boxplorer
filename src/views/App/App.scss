@@ -31,3 +31,13 @@ body {
 .pn-mb-10 {
     margin-bottom: 10px;
 }
+
+.clearfix {
+    
+    &::before, &::after {
+        visibility: hidden;
+        content: " ";
+        display: table;
+        clear: both;
+    }
+}

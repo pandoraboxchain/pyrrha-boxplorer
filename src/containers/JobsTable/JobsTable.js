@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Table, Button, Pagination, Input, Icon } from 'semantic-ui-react';
+import { Table, Button, Pagination, Input, Icon, Checkbox } from 'semantic-ui-react';
 import { Route, Link, withRouter } from 'react-router-dom';
 import ErrorsBlock from '../../components/ErrorsBlock';
 import JobDetails from '../../containers/JobDetails';
@@ -15,9 +15,13 @@ import './JobsTable.scss';
 
 class JobsTable extends Component {
 
+    state = {
+        compleatedOnly: false
+    }
+
     handleRefreshJobs = (e) => {
         e.preventDefault();
-        this.props.refresh();        
+        this.props.refresh(this.props.page);        
     };
 
     UNSAFE_componentWillMount = () => {
@@ -27,6 +31,23 @@ class JobsTable extends Component {
             this.props.refresh();       
         }        
     };
+
+    toggleCompleatedOnly = () => {
+
+        this.setState({
+            compleatedOnly: !this.state.compleatedOnly
+        }, () => {
+
+            if (this.state.compleatedOnly) {
+
+                this.props.updateFilters('state', 7);
+                this.props.doSearch();
+            } else {
+    
+                this.props.resetFilter('state');
+            }
+        });
+    }
 
     handlePaginationChange = (e, { activePage }) => {
         e.preventDefault();
@@ -143,6 +164,10 @@ class JobsTable extends Component {
                                 {isFetching &&
                                     <span>Fetching of jobs...</span>
                                 }
+
+                                <div className="compleated-selector">
+                                    <Checkbox label='Compleated jobs only' onChange={this.toggleCompleatedOnly} checked={this.state.compleatedOnly} />
+                                </div>                                
                             </Table.Cell>
                         </Table.Row>
                     </Table.Footer>

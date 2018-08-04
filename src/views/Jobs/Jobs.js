@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import JobsTable from '../../containers/JobsTable/JobsTable';
+import './Jobs.scss';
 
 export default class Jobs extends Component {
 

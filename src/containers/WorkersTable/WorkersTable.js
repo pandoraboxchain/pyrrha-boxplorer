@@ -17,7 +17,7 @@ class WorkersTable extends Component {
 
     handleRefreshWorkers = (e) => {
         e.preventDefault();
-        this.props.refresh();        
+        this.props.refresh(this.props.page);        
     };
 
     UNSAFE_componentWillMount = () => {

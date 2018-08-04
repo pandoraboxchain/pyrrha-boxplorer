@@ -16,7 +16,7 @@ class KernelsTable extends Component {
 
     handleRefreshKernels = (e) => {
         e.preventDefault();
-        this.props.refresh();        
+        this.props.refresh(this.props.page);        
     };
 
     UNSAFE_componentWillMount = () => {
