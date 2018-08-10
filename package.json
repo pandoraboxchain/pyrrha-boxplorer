@@ -1,6 +1,6 @@
 {
   "name": "pyrrha-boxplorer",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "description": "Pandora Pyrrha Boxchain Explorer",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

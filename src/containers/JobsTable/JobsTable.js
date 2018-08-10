@@ -127,9 +127,9 @@ class JobsTable extends Component {
                             </Table.Row>
                         }
                         {jobs && jobs.length > 0 &&
-                            jobs.map((job, index) => (
+                            jobs.map(job => (
                                 <Table.Row key={job.address}>
-                                    <Table.Cell>{index}</Table.Cell>
+                                    <Table.Cell>{job.id}</Table.Cell>
                                     <Table.Cell title={job.address}>
                                         <Link to={{
                                             pathname: `${match.url}/${job.address}`,

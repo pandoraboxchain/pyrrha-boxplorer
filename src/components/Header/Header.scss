@@ -26,4 +26,18 @@
     margin-right: 16px !important;
 }
 
+.pn-header {
+    .logo {
+        float: left;
+        vertical-align: middle;
+        margin: -3px 8px 0 0;
+        width: 32px;
+        height: 32px;
+        background-image: url('./panlogo.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 160%;
+    }
+}
+
 

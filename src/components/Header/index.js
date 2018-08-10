@@ -30,7 +30,7 @@ class Header extends Component {
                     <Responsive as={Menu}  {...Responsive.onlyComputer}>
                         <Menu fixed="top" inverted stackable className="pn-header">                            
                             <Menu.Item header>
-                                <Link to="/"><h1 className="pn-head-title">Pyrrha Boxplorer</h1></Link>
+                            <div className="logo"></div><Link to="/"><h1 className="pn-head-title">Pyrrha Boxplorer</h1></Link>
                             </Menu.Item>            
                             {routes.map(route => (
                                 <Menu.Item key={route.path.toString()}>
