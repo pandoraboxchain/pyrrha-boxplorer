@@ -8,7 +8,7 @@
     "start:pan": "BROWSER=none REACT_APP_USE_HOST=default npx react-app-rewired start",
     "start:stage": "BROWSER=none REACT_APP_USE_HOST=staging npx react-app-rewired start",
     "build:docker": "docker-compose build --no-cache",
-    "start:docker": "docker-compose up -d --remove-orphans",
+    "start:docker": "docker-compose up --remove-orphans",
     "stop:docker": "docker-compose down"
   },
   "repository": {
