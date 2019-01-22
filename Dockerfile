@@ -13,7 +13,7 @@ RUN npm i pm2 -g --quiet
 RUN npm i --quiet
 
 ARG REACT_APP_BOXPROXY_PROTOCOL=http
-ARG REACT_APP_BOXPROXY_HOST=boxproxy.pandora.network
+ARG REACT_APP_BOXPROXY_HOST=boxproxy.staging.pandora.network
 ARG REACT_APP_BOXPROXY_PORT=80
 ARG REACT_APP_BOXPROXY_WS_PORT=1337
 
